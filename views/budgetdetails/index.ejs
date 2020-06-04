@@ -6,7 +6,121 @@
 </head>
 
 <body>
-  <h1>Budget Details Page</h1>
+  <!-- functions -->
+  <%
+  const formatDate = (date) => {
+    const dateArray = date.toJSON().split(" ");
+    console.log(dateArray);
+    const formattedDate = dateArray.slice(1, 3).join(" ");
+    console.log(formattedDate);
+    return formattedDate;
+  }
+  %>
+  <%- include('../partials/nav.ejs')%>
+  <div class="container">
+    <h1 class="center">Hello, User! Here's Your Budget Overview for this Month.</h1>
+    <div class="row">
+      <span>
+        <div class="col s6 center">
+          <h2>TOTAL EARNED</h2>
+          <h3 class="center">$0</h3>
+        </div>
+      </span>
+      <span>
+        <div class="col s6 center">
+          <h2>TOTAL SPENT</h2>
+          <h3 class="center">$0</h3>
+        </div>
+      </span>
+    </div>
+    <hr>
+    <div class="row">
+      <table class="col s12 striped centered responsive-table">
+        <thead>
+          <tr>
+            <th>Budget Category</th>
+            <th>Total Estimated</th>
+            <th>Current Actual Total</th>
+          </tr>
+        <tbody>
+          <tr>
+            <td>Income</td>
+            <td>$0</td>
+            <td>$0</td>
+          </tr>
+          <tr>
+            <td>Firm Expense</td>
+            <td>$0</td>
+            <td>$0</td>
+          </tr>
+          <tr>
+            <td>Flex Expenses</td>
+            <td>$0</td>
+            <td>$0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <div class="row">
+      <h4>Income</h4>
+      <ul class="col s12 collapsible">
+        <%
+        for (budgetItem of budgetDetails) {
+          <!-- budgetItem.date = formatDate(budgetItem.date); -->
+          if(budgetItem.category === 'income') {
+        %>
+        <li class="row">
+          <p class="col s5"><%= budgetItem.date %></p>
+          <p class="col s5">$<%= budgetItem.amount %></p>
+          <a class="col s2" href="/budgetdetails/<%= budgetItem.id %>">See More Details</a>
+        </li>
+        <%
+          }
+        }
+        %>
+      </ul>
+    </div>
+    <div class="row">
+      <h4>Flex Expenses</h4>
+      <ul class="col s12 collapsible">
+        <%
+        for (budgetItem of budgetDetails) {
+          <!-- budgetItem.date = formatDate(budgetItem.date); -->
+          if(budgetItem.category === 'flex-expense') {
+        %>
+        <li class="row">
+          <p class="col s5"><%= budgetItem.date %></p>
+          <p class="col s5">$<%= budgetItem.amount %></p>
+          <a class="col s2" href="/budgetdetails/<%= budgetItem.id %>">See More Details</a>
+        </li>
+        <%
+          }
+        }
+        %>
+      </ul>
+    </div>
+    <div class="row">
+      <h4>Firm Expenses</h4>
+      <ul class="col s12 collapsible">
+        <%
+        for (budgetItem of budgetDetails) {
+          <!-- budgetItem.date = formatDate(budgetItem.date); -->
+          if(budgetItem.category === 'firm-expense') {
+        %>
+        <li class="row">
+          <p class="col s5"><%= budgetItem.date %></p>
+          <p class="col s5">$<%= budgetItem.amount %></p>
+          <a class="col s2" href="/budgetdetails/<%= budgetItem.id %>">See More Details</a>
+        </li>
+        <%
+          }
+        }
+        %>
+      </ul>
+    </div>
+  </div>
+  <%- include('../partials/footer.ejs')%>
 </body>
 
 </html>

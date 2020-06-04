@@ -27,7 +27,7 @@ budgetdetails.get('/new', (req, res) => {
 //CREATE
 budgetdetails.post('/', (req, res) => {
   BudgetDetail.create(req.body, (err, createdDetail) => {
-    res.redirect('/')
+    res.redirect('/budgetdetails')
   })
 })
 

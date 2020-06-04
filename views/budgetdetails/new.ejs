@@ -7,14 +7,16 @@
 </head>
 
 <body>
+  <%- include('../partials/nav.ejs')%>
+
   <div class="container">
     <h1>Add to Your Income / Expenses</h1>
     <div class="row">
       <form class="col s12" action="/budgetdetails" method="post">
         <div class="row">
           <div class="input-field col s6">
-            <input type="date" name="date" id="date" />
-            <label for="date">Date </label>
+            <input type="text" name="date" class="datepicker" />
+            <label for="date">Date</label>
           </div>
         </div>
         <div class="row">
@@ -22,8 +24,8 @@
             <select name="category">
               <option value="" disable selected>--Please choose an option--</option>
               <option value="income">Income</option>
-              <option value="flexexpense">Flex Expense</option>
-              <option value="Firm Expense">Firm Expense</option>
+              <option value="flex-expense">Flex Expense</option>
+              <option value="firm-expense">Firm Expense</option>
             </select>
             <label for="category">Category </label>
           </div>
@@ -36,8 +38,8 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input name="description" id="description" />
-            <label for="descripton">Description</label>
+            <input type="text" name="description" id="description" />
+            <label for="description">Description</label>
           </div>
         </div>
         <div class="row">
