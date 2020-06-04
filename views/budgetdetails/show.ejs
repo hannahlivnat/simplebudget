@@ -5,9 +5,32 @@
 <body>
   <%- include('../partials/nav.ejs')%>
 
-  <div class="container">
-
+  <div class="container show-container">
+    <div class="card">
+      <div class="card-content">
+        <h4 class="center"><%=budgetItem.description%></h4>
+      </div>
+      <div class="card-tabs row">
+        <ul class="tabs tabs-fixed-width">
+          <li class="tab"><a class="active" href="#amount">Amount</a></li>
+          <li class="tab"><a href="#category">Category</a></li>
+          <li class="tab"><a href="#date">Date</a></li>
+          <li class="tab"><a href="#change">Change / Delete</a></li>
+        </ul>
+      </div>
+      <div class="card-content grey lighten-4">
+        <div id="amount"><%=budgetItem.amount%></div>
+        <div id="category"><%=budgetItem.category%></div>
+        <div id="date"><%=budgetItem.date%></div>
+        <div id="change">
+          <li><a href="/budgetdetails/<%=budgetItem.id%>/edit">Edit Details</a></li>
+          <li><a href="/budgetdetails/delete">Delete this Expense / Income</a></li>
+        </div>
+      </div>
+    </div>
   </div>
+  <%- include('../partials/footer.ejs')%>
+
 </body>
 
 </html>

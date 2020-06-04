@@ -1,0 +1,13 @@
+.show-container {
+  display: grid;
+  grid-template-rows: 100px auto 1fr;
+  grid-template-columns: 100%;
+  grid-template-areas: "."
+    "card"
+    ".";
+
+}
+
+.card {
+  grid-area: card;
+}
