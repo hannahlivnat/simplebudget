@@ -32,9 +32,21 @@ budgetdetails.post('/', (req, res) => {
 })
 
 //EDIT
+budgetdetails.get('/:id/edit', (req, res) => {
+  BudgetDetail.findById(req.params.id, (err, foundItem) => {
+    res.render('budgetdetails/edit.ejs', {
+      budgetItem: foundItem,
+      pageName: 'Edit Item Details'
+    })
+  })
+});
 
 //UPDATE
-
+budgetdetails.put('/:id', (req, res) => {
+  BudgetDetail.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
+    res.redirect(`/budgetdetails/${updatedItem.id}`);
+  })
+})
 //SHOW
 budgetdetails.get('/:id', (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
