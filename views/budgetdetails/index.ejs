@@ -15,6 +15,25 @@
     console.log(formattedDate);
     return formattedDate;
   }
+
+  const calculateTotal = (Itemcategory) => {
+    let total = 0;
+    for (budgetItem of budgetDetails) {
+      if(budgetItem.category === Itemcategory) {
+        total += parseInt(budgetItem.amount);
+      }
+    }
+    return total;
+  }
+  const calculateMultipleTotals = (itemcategory1, itemcategory2) => {
+    let total = 0;
+    for (budgetItem of budgetDetails) {
+      if(budgetItem.category === itemcategory1 || budgetItem.category === itemcategory2) {
+        total += parseInt(budgetItem.amount);
+      }
+    }
+    return total;
+  }
   %>
   <%- include('../partials/nav.ejs')%>
   <div class="container">
@@ -23,13 +42,18 @@
       <span>
         <div class="col s6 center">
           <h2>TOTAL EARNED</h2>
-          <h3 class="center">$0</h3>
+          <h3 class="center">
+            <%const totalIncome = calculateTotal('income');%>
+            $<%=totalIncome%>
+          </h3>
         </div>
       </span>
       <span>
         <div class="col s6 center">
           <h2>TOTAL SPENT</h2>
-          <h3 class="center">$0</h3>
+          <h3 class="center">
+            <%const totalExpense = calculateMultipleTotals('flex-expense', 'firm-expense')%>
+            $<%=totalExpense%></h3>
         </div>
       </span>
     </div>
