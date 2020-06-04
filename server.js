@@ -44,8 +44,8 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 const budgetDetailsController = require('./controllers/budget_details_controller.js');
 app.use('/budgetdetails', budgetDetailsController);
 
-//const usersController = require('./controllers/users_controller.js');
-//app.use('/users', usersController); 
+const usersController = require('./controllers/users_controller.js');
+app.use('/users', usersController);
 
 // const budgetPlansController = require('./controllers/budget_plan_controller.js');
 // app.use(budgetPlansController);
