@@ -70,17 +70,23 @@
           <tr>
             <td>Income</td>
             <td>$0</td>
-            <td>$0</td>
+            <td>$<%= totalIncome %></td>
           </tr>
           <tr>
             <td>Firm Expense</td>
             <td>$0</td>
-            <td>$0</td>
+            <td>
+              <%const firmExpenseTotal = calculateTotal('firm-expense');%>
+              $<%=firmExpenseTotal%>
+            </td>
           </tr>
           <tr>
             <td>Flex Expenses</td>
             <td>$0</td>
-            <td>$0</td>
+            <td>
+              <%const flexExpenseTotal = calculateTotal('flex-expense');%>
+              $<%=flexExpenseTotal%>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -93,9 +99,10 @@
         for (budgetItem of budgetDetails) {
           <!-- budgetItem.date = formatDate(budgetItem.date); -->
           if(budgetItem.category === 'income') {
+            const date = (budgetItem.date).toDateString();
         %>
         <li class="row">
-          <p class="col s5"><%= budgetItem.date %></p>
+          <p class="col s5"><%= date %></p>
           <p class="col s5">$<%= budgetItem.amount %></p>
           <a class="col s2" href="/budgetdetails/<%= budgetItem.id %>">See More Details</a>
         </li>
@@ -112,9 +119,10 @@
         for (budgetItem of budgetDetails) {
           <!-- budgetItem.date = formatDate(budgetItem.date); -->
           if(budgetItem.category === 'flex-expense') {
+            const date = (budgetItem.date).toDateString();
         %>
         <li class="row">
-          <p class="col s5"><%= budgetItem.date %></p>
+          <p class="col s5"><%= date %></p>
           <p class="col s5">$<%= budgetItem.amount %></p>
           <a class="col s2" href="/budgetdetails/<%= budgetItem.id %>">See More Details</a>
         </li>
@@ -131,9 +139,10 @@
         for (budgetItem of budgetDetails) {
           <!-- budgetItem.date = formatDate(budgetItem.date); -->
           if(budgetItem.category === 'firm-expense') {
+            const date = (budgetItem.date).toDateString();
         %>
         <li class="row">
-          <p class="col s5"><%= budgetItem.date %></p>
+          <p class="col s5"><%= date %></p>
           <p class="col s5">$<%= budgetItem.amount %></p>
           <a class="col s2" href="/budgetdetails/<%= budgetItem.id %>">See More Details</a>
         </li>

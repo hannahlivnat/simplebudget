@@ -3,5 +3,7 @@ console.log($);
 $(() => {
   $('select').formSelect();
   $(".dropdown-trigger").dropdown();
-  $('.datepicker').datepicker();
+  $('.datepicker').datepicker({
+    format: 'mm-dd-yyyy'
+  });
 })
