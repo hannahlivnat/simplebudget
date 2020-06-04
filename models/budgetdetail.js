@@ -11,21 +11,15 @@ const budgetDetailsSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true,
-    enum: ['Income', 'Flex Spending', 'Firm Spending']
-  }, //income, flexSpending, or firmSpending
+    required: true
+  },
   description: {
     type: String,
     required: false
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
   }
 }, {
   timestamps: true
-});
+})
 
 const BudgetDetail = mongoose.model('BudgetDetail', budgetDetailsSchema);
-
 module.exports = BudgetDetail;
