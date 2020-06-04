@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const sessions = require('express-session');
 
 //CONFIG
 require('dotenv').config();
@@ -18,6 +19,11 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(express.static('public'));
+app.use(sessions({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
 
 //Connect Mongoose 
 mongoose.connect(MONGODB_URI, {
@@ -37,6 +43,9 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //CONTROLLERS
 const budgetDetailsController = require('./controllers/budget_details_controller.js');
 app.use('/budgetdetails', budgetDetailsController);
+
+//const usersController = require('./controllers/users_controller.js');
+//app.use('/users', usersController); 
 
 // const budgetPlansController = require('./controllers/budget_plan_controller.js');
 // app.use(budgetPlansController);

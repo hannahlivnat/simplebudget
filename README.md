@@ -22,3 +22,18 @@ By separating expenses into your steady monthly expenses and controllable monthl
 ## FEATURES / TECHNOLOGY USED
 
 ## UNSOLVED PROBLEMS
+* Expand features to include option of joint and/or single categories for couples: 
+  * Joint Income
+  * Separate Income
+  * Joint Firm Expenses
+  * Separate Firm Expenses
+  * Joint Flex Expenses
+  * Separate Flex Expenses
+
+  * Total Earned
+  * Joint Total Earned
+  * Separate Total Earned
+
+  * Total Spent
+  * Joint Total Spent
+  * Separate Total Spent

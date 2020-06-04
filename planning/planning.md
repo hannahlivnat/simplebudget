@@ -5,26 +5,26 @@ __Project Due Date:__ June 10
 
 ### To Achieve MVP:
 
-* Have a database for expenses and income
-* Have 7 RESTful routes 
+* Have a database for budget details x
+* Have 7 RESTful routes x
 * index page: 
-  * All home information is displayed
-  * There is a link leading to show page
-* show page: 
-  * All details about income and expenses displayed
-  * link to create new expense or income
-  * link to delete an expense or income
-  * Total Income and Total Spent Displayed at top of page
-  * Total Flex and Firm are displayed on show page
-* new page: 
-  * form asks users to enter information in expense/income database: data, amount, category, description
-  * submit button will trigger successful post route
-* edit page: 
-  * form prefills and lets user edit information in expense/income database
-  * pressing submit will trigger successful put route
-* delete button: 
-  * pressing the delete button deletes the data from ui and from database.
-* Be able to use database to update budget variables
+  * Total Income and Total Spent Displayed at top of page x
+  * Total Flex and Firm are displayed x
+  * Categorization of entered data displayed x
+  * There is a link leading to show page x
+* show page: x
+  * details about income and expenses displayed x
+  * link to create new expense or income x
+  * link to delete an expense or income x
+* new page: x
+  * form asks users to enter information in expense/income database: data, amount, category, description x
+  * submit button will trigger successful post route x
+* edit page: x
+  * form prefills and lets user edit information in expense/income database x
+  * pressing submit will trigger successful put route x
+* delete button: x
+  * pressing the delete button deletes the data from ui and from database. x
+* Be able to use database to update budget variables x
 
 ### Moving Past MVP:
 * authentication: 
