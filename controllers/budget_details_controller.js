@@ -22,14 +22,14 @@ budgetdetails.get('/new', (req, res) => {
   res.render('budgetdetails/new.ejs', {
     pageName: 'Create New Budget Item'
   })
-})
+});
 
 //CREATE
 budgetdetails.post('/', (req, res) => {
   BudgetDetail.create(req.body, (err, createdDetail) => {
     res.redirect('/budgetdetails')
   })
-})
+});
 
 //EDIT
 budgetdetails.get('/:id/edit', (req, res) => {
@@ -46,7 +46,8 @@ budgetdetails.put('/:id', (req, res) => {
   BudgetDetail.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
     res.redirect(`/budgetdetails/${updatedItem.id}`);
   })
-})
+});
+
 //SHOW
 budgetdetails.get('/:id', (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
@@ -55,8 +56,13 @@ budgetdetails.get('/:id', (req, res) => {
       pageName: 'Budget Item Details'
     })
   })
-})
+});
 
 //DELETE
+budgetdetails.delete('/:id', (req, res) => {
+  BudgetDetail.findByIdAndRemove(req.params.id, (err, budgetItem) => {
+    res.redirect('/budgetdetails/')
+  })
+});
 
 module.exports = budgetdetails;
