@@ -36,6 +36,14 @@ budgetdetails.post('/', (req, res) => {
 //UPDATE
 
 //SHOW
+budgetdetails.get('/:id', (req, res) => {
+  BudgetDetail.findById(req.params.id, (err, foundItem) => {
+    res.render('budgetdetails/show.ejs', {
+      budgetItem: foundItem,
+      pageName: 'Budget Item Details'
+    })
+  })
+})
 
 //DELETE
 
