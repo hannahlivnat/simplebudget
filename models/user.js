@@ -7,12 +7,6 @@ const userSchema = new Schema({
   firstname: {
     type: String,
     required: true,
-    validate: {
-      validator: (text) => {
-        return text.length > 0;
-      },
-      message: "Please enter your name"
-    }
   },
   lastname: {
     type: String,
@@ -44,5 +38,3 @@ userSchema.plugin(uniqueValidator, {
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
-
-//reference -- https://www.youtube.com/watch?v=5H0geGYv_A0

@@ -1,7 +1,8 @@
 //set up
 const express = require('express');
+const router = express.Router();
+
 const BudgetDetail = require('../models/budgetdetail.js');
-const budgetdetails = express.Router();
 const BudgetPlan = require('../models/budgetplan.js');
 
 
@@ -11,14 +12,14 @@ const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
     return next();
   } else {
-    res.redirect('/sessions/new');
+    res.redirect('/login');
   }
 }
 
 //ROUTES
 
 //INDEX
-budgetdetails.get('/', isAuthenticated, (req, res) => {
+router.get('/', isAuthenticated, (req, res) => {
   // res.send("I'm finally reachable")
   BudgetDetail.find({}, (err, allReports) => {
     res.render('budgetdetails/index.ejs', {
@@ -31,7 +32,7 @@ budgetdetails.get('/', isAuthenticated, (req, res) => {
 });
 
 //NEW
-budgetdetails.get('/new', isAuthenticated, (req, res) => {
+router.get('/new', isAuthenticated, (req, res) => {
   // res.send("I'm the new page")
   res.render('budgetdetails/new.ejs', {
     pageName: 'Create New Budget Item',
@@ -41,13 +42,13 @@ budgetdetails.get('/new', isAuthenticated, (req, res) => {
 });
 
 //CREATE
-budgetdetails.post('/', (req, res) => {
+router.post('/', (req, res) => {
   const newBudgetItem = {
     "date": req.body.date,
     "amount": req.body.amount,
     "category": req.body.category,
     "description": req.body.description,
-    "user": req.session.currentUser.id
+    "user": req.session.userId
   }
   BudgetDetail.create(newBudgetItem, (err, createdDetail) => {
     if (err) {
@@ -60,7 +61,7 @@ budgetdetails.post('/', (req, res) => {
 });
 
 //EDIT
-budgetdetails.get('/:id/edit', isAuthenticated, (req, res) => {
+router.get('/:id/edit', isAuthenticated, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     res.render('budgetdetails/edit.ejs', {
       budgetItem: foundItem,
@@ -72,14 +73,14 @@ budgetdetails.get('/:id/edit', isAuthenticated, (req, res) => {
 });
 
 //UPDATE
-budgetdetails.put('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   BudgetDetail.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
     res.redirect(`/budgetdetails/${updatedItem.id}`);
   })
 });
 
 //SHOW
-budgetdetails.get('/:id', isAuthenticated, (req, res) => {
+router.get('/:id', isAuthenticated, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     res.render('budgetdetails/show.ejs', {
       budgetItem: foundItem,
@@ -91,10 +92,10 @@ budgetdetails.get('/:id', isAuthenticated, (req, res) => {
 });
 
 //DELETE
-budgetdetails.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   BudgetDetail.findByIdAndRemove(req.params.id, (err, budgetItem) => {
     res.redirect('/budgetdetails/')
   })
 });
 
-module.exports = budgetdetails;
+module.exports = router;

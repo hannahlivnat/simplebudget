@@ -1,34 +1,33 @@
 //DEPENDENCIES
-const bcrypt = require('bcrypt');
 const express = require('express');
-const User = require('../models/users.js');
+const router = express.Router();
 
-//CONFIG
-const users = express.Router();
-
+const bcrypt = require('bcrypt');
+const User = require('../models/user.js');
 
 //ROUTES
 
 //NEW
-users.get('/new', (req, res) => {
+router.get('/signup', (req, res) => {
   // res.send('Hello, I am New!')
-  res.render('users/new.ejs', {
+  res.render('users/signup.ejs', {
     pageName: 'Sign Up Page',
-    currentUser: req.session.currentUser
+    currentUser: req.session.currentUser,
+
   })
 });
 
 //CREATE
-users.post('/', (req, res) => {
+router.post('/users', (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
   User.create(req.body, (err, createdUser) => {
     if (err) {
       res.send('username is not unique');
     } else {
-      res.redirect('/budgetdetails')
+      res.redirect('/login')
     }
   })
 });
 
 //EXPORT USER
-module.exports = users;
+module.exports = router;

@@ -1,20 +1,21 @@
 //SET UP
 const express = require('express');
+const router = express.Router();
+
 const BudgetPlan = require('../models/budgetplan.js');
-const budgetplans = express.Router();
 
 //CHECK THAT USER IS LOGGED IN
 const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
     return next();
   } else {
-    res.redirect('/sessions/new');
+    res.redirect('/login');
   }
 }
 //ROUTES
 
 //INDEX
-budgetplans.get('/', isAuthenticated, (req, res) => {
+router.get('/', isAuthenticated, (req, res) => {
   BudgetPlan.get({}, (err, allPlan) => {
     res.render('/budgetplans/index.ejs', {
       pageName: 'Budget Plan',
@@ -25,7 +26,7 @@ budgetplans.get('/', isAuthenticated, (req, res) => {
 });
 
 //NEW
-budgetplans.get('/new', isAuthenticated, (req, res) => {
+router.get('/new', isAuthenticated, (req, res) => {
   res.render('budgetplans/new.ejs', {
     pageName: 'New Budget Plan',
     currentUser: req.session.currentUser,
@@ -33,12 +34,17 @@ budgetplans.get('/new', isAuthenticated, (req, res) => {
 });
 
 //POST
-budgetplans.post('/', (req, res) => {
-  req.body.user = (req.session.currentUser)._id
-  BudgetPlan.create(req.body, (err, createdPlan) => {
+router.post('/', (req, res) => {
+  const newBudgetPlan = {
+    "expectedincome": req.body.expectedincome,
+    "expectedflexexpenses": req.body.expectedflexexpenses,
+    "expectedfirmexpenses": req.body.expectedfirmexpenses,
+    "user": req.session.userId
+  }
+  BudgetPlan.create(newBudgetPlan, (err, createdPlan) => {
     res.redirect('/budgetdetails')
   })
 });
 
 //EXPORT
-module.exports = budgetplans;
+module.exports = router;
