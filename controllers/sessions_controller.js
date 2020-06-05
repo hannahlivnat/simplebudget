@@ -36,7 +36,7 @@ sessions.post('/', (req, res) => {
 
 //DELETE
 sessions.delete('/', (req, res) => {
-  req.sessions.destroy(() => {
+  req.session.destroy(() => {
     res.redirect('/budgetdetails')
   })
 });
