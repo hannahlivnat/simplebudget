@@ -6,13 +6,15 @@ const User = require('../models/users.js');
 //CONFIG
 const users = express.Router();
 
+
 //ROUTES
 
 //NEW
 users.get('/new', (req, res) => {
   // res.send('Hello, I am New!')
   res.render('users/new.ejs', {
-    pageName: 'Sign Up Page'
+    pageName: 'Sign Up Page',
+    currentUser: req.session.currentUser
   })
 });
 
@@ -20,7 +22,11 @@ users.get('/new', (req, res) => {
 users.post('/', (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
   User.create(req.body, (err, createdUser) => {
-    res.redirect('/budgetdetails')
+    if (err) {
+      res.flash()
+    } else {
+      res.redirect('/budgetdetails')
+    }
   })
 });
 

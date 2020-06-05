@@ -1,11 +1,20 @@
 <!-- dropdown structure -->
 <ul id="dropdown1" class="dropdown-content">
+  <% if(currentUser) { %>
+  <li>Hello <%=currentUser.firstname%>!</li>
   <li>
-    <a href="#">Log In</a>
+    <form action="/sessions?_method=DELETE" method="POST">
+      <input type="submit" value="Log Out">
+    </form>
+  </li>
+  <% } else { %>
+  <li>
+    <a href="/sessions/new">Log In</a>
   </li>
   <li>
     <a href="/users/new">Sign Up</a>
   </li>
+  <% } %>
 </ul>
 <nav>
   <div class="nav-wrapper">

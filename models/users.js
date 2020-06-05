@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -19,6 +21,11 @@ const userSchema = new Schema({
     type: String,
     required: true
   }
+});
+
+//apply uniqueValidator plugin to userSchema - checks for unique username
+userSchema.plugin(uniqueValidator, {
+  message: 'Sorry, {PATH} needs to be unique'
 });
 
 const User = mongoose.model('User', userSchema);

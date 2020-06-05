@@ -47,6 +47,9 @@ app.use('/budgetdetails', budgetDetailsController);
 const usersController = require('./controllers/users_controller.js');
 app.use('/users', usersController);
 
+const sessionsController = require('./controllers/sessions_controller.js');
+app.use('/sessions', sessionsController);
+
 // const budgetPlansController = require('./controllers/budget_plan_controller.js');
 // app.use(budgetPlansController);
 
