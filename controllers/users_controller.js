@@ -14,7 +14,6 @@ users.get('/new', (req, res) => {
   // res.send('Hello, I am New!')
   res.render('users/new.ejs', {
     pageName: 'Sign Up Page',
-    currentUser: req.session.currentUser
   })
 });
 

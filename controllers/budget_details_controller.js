@@ -3,6 +3,7 @@ const express = require('express');
 const BudgetDetail = require('../models/budgetdetail.js');
 const budgetdetails = express.Router();
 const BudgetPlan = require('../models/budgetplan.js');
+// const User = require('../models/users.js');
 
 
 //CHECK THAT USER IS LOGGED IN
@@ -14,20 +15,31 @@ const isAuthenticated = (req, res, next) => {
   }
 }
 
+// const findUser = () => {
+//   User.findOne({
+//       username: ().username
+//     })
+//     .populate('budgetdetails').exec((err, userwithbudgetdetails) => {
+//       console.log(userwithbudgetdetails);
+//     })
+// };
+
+
 //ROUTES
 
 //INDEX
 budgetdetails.get('/', isAuthenticated, (req, res) => {
   // res.send("I'm finally reachable")
-  BudgetDetail.find({}, (err, allReports) => {
+  BudgetDetail.find({}, (req, res) => {
     res.render('budgetdetails/index.ejs', {
-      budgetDetails: allReports,
+      budgetDetails: budgetdetails,
       pageName: 'Budget Summary',
       currentUser: req.session.currentUser,
       budgetPlan: BudgetPlan[0]
     })
   })
-});
+})
+// });
 
 //NEW
 budgetdetails.get('/new', isAuthenticated, (req, res) => {
