@@ -27,8 +27,8 @@ __Project Due Date:__ June 10
 * Be able to use database to update budget variables x
 
 ### Moving Past MVP:
-* authentication: 
-  * create users and sessions
+* authentication: x
+  * create users and sessions x
 * Have third database: budget goals. Create new and edit routes for budget goals
 * about page: 
   * linked to in index page
@@ -48,7 +48,7 @@ __By Wednesday end of day:__
 * Have data structure figured out - relationship between user and financial data, how it's stored. Complete the data schemas and test.
 
 __By Thursday end of day:__
-* Have RESTful routes complete and views completed for both users, sessions, and budget data. Start debugging any remaining errors
+* Have RESTful routes complete and views completed for both users, sessions, and budget data. Start debugging any remaining errors x
 
 __By Friday end of day:__ 
 * Have third database and routes complete for budget goals

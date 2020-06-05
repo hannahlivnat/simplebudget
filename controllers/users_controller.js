@@ -23,7 +23,7 @@ users.post('/', (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
   User.create(req.body, (err, createdUser) => {
     if (err) {
-      res.flash()
+      res.send('username is not unique');
     } else {
       res.redirect('/budgetdetails')
     }

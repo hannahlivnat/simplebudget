@@ -4,6 +4,7 @@ const express = require('express');
 const sessions = express.Router();
 
 const User = require('../models/users.js');
+const BudgetPlan = require('../models/budgetplan.js');
 
 //ROUTES
 

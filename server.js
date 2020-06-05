@@ -50,8 +50,8 @@ app.use('/users', usersController);
 const sessionsController = require('./controllers/sessions_controller.js');
 app.use('/sessions', sessionsController);
 
-// const budgetPlansController = require('./controllers/budget_plan_controller.js');
-// app.use(budgetPlansController);
+const budgetPlansController = require('./controllers/budget_plans_controller.js');
+app.use('/budgetplans', budgetPlansController);
 
 //___________________
 // Routes

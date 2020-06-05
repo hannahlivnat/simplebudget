@@ -21,7 +21,8 @@ budgetdetails.get('/', isAuthenticated, (req, res) => {
     res.render('budgetdetails/index.ejs', {
       budgetDetails: allReports,
       pageName: 'Budget Summary',
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      budgetPlan: req.budgetPlan
     })
   })
 });

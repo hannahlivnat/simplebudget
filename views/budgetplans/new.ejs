@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head.ejs')%>
+
+</head>
+
+<body>
+  <%- include('../partials/nav.ejs')%>
+
+  <div class="container">
+    <h1>Create a Budget Plan</h1>
+    <a href="#" class="center">About Your Budget Plan</a>
+    <div class="row">
+      <form class="col s12" action="/budgetplans" method="POST">
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="number" name="expectedincome" id="expectedincome">
+            <label for="expectedincome"> What is your expected income? </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="number" name="expectedflexexpenses" id="expectedflexexpenses" />
+            <label for="expectedflexexpenses">What is your total budget for Flex Expenses?</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="number" name="expectedfirmexpenses" id="expectedfirmexpenses" />
+            <label for="expectedfirmexpenses">What is your total budget for Firm Expenses?</label>
+          </div>
+        </div>
+        <div class="row">
+          <input class="btn col s4" type="submit" value="Create Your Budget Plan">
+        </div>
+      </form>
+    </div>
+  </div>
+  <%- include('../partials/footer.ejs')%>
+</body>
+
+</html>
