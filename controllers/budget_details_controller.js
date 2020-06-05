@@ -3,10 +3,19 @@ const express = require('express');
 const BudgetDetail = require('../models/budgetdetail.js');
 const budgetdetails = express.Router();
 
+//CHECK THAT USER IS LOGGED IN
+const isAuthenticated = (req, res, next) => {
+  if (req.session.currentUser) {
+    return next();
+  } else {
+    res.redirect('/sessions/new');
+  }
+}
+
 //ROUTES
 
 //INDEX
-budgetdetails.get('/', (req, res) => {
+budgetdetails.get('/', isAuthenticated, (req, res) => {
   // res.send("I'm finally reachable")
   BudgetDetail.find({}, (err, allReports) => {
     res.render('budgetdetails/index.ejs', {
@@ -18,7 +27,7 @@ budgetdetails.get('/', (req, res) => {
 });
 
 //NEW
-budgetdetails.get('/new', (req, res) => {
+budgetdetails.get('/new', isAuthenticated, (req, res) => {
   // res.send("I'm the new page")
   res.render('budgetdetails/new.ejs', {
     pageName: 'Create New Budget Item',
@@ -35,7 +44,7 @@ budgetdetails.post('/', (req, res) => {
 });
 
 //EDIT
-budgetdetails.get('/:id/edit', (req, res) => {
+budgetdetails.get('/:id/edit', isAuthenticated, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     res.render('budgetdetails/edit.ejs', {
       budgetItem: foundItem,
@@ -54,7 +63,7 @@ budgetdetails.put('/:id', (req, res) => {
 });
 
 //SHOW
-budgetdetails.get('/:id', (req, res) => {
+budgetdetails.get('/:id', isAuthenticated, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     res.render('budgetdetails/show.ejs', {
       budgetItem: foundItem,
