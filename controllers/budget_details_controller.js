@@ -5,6 +5,7 @@ const budgetdetails = express.Router();
 const BudgetPlan = require('../models/budgetplan.js');
 
 
+
 //CHECK THAT USER IS LOGGED IN
 const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
@@ -41,8 +42,20 @@ budgetdetails.get('/new', isAuthenticated, (req, res) => {
 
 //CREATE
 budgetdetails.post('/', (req, res) => {
-  BudgetDetail.create(req.body, (err, createdDetail) => {
-    res.redirect('/budgetdetails')
+  const newBudgetItem = {
+    "date": req.body.date,
+    "amount": req.body.amount,
+    "category": req.body.category,
+    "description": req.body.description,
+    "user": req.session.currentUser.id
+  }
+  BudgetDetail.create(newBudgetItem, (err, createdDetail) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.redirect('/budgetdetails')
+
+    }
   })
 });
 

@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
-
-const budgetDetailsSchema = new mongoose.Schema({
+const budgetDetailsSchema = new Schema({
   date: {
     type: Date,
     required: true
@@ -22,6 +20,7 @@ const budgetDetailsSchema = new mongoose.Schema({
     required: false
   },
   user: {
+    required: true,
     type: Schema.Types.ObjectId,
     ref: 'User'
   }

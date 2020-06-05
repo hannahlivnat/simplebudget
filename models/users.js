@@ -1,12 +1,18 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+  _id: Schema.Types.ObjectId,
   firstname: {
     type: String,
-    required: true
+    required: true,
+    validate: {
+      validator: (text) => {
+        return text.length > 0;
+      },
+      message: "Please enter your name"
+    }
   },
   lastname: {
     type: String,
@@ -38,3 +44,5 @@ userSchema.plugin(uniqueValidator, {
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
+
+//reference -- https://www.youtube.com/watch?v=5H0geGYv_A0

@@ -2,6 +2,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
 const sessions = require('express-session');
 
 //CONFIG
@@ -14,16 +16,19 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 
 //MIDDLEWARE
-app.use(methodOverride('_method'));
-app.use(express.urlencoded({
-  extended: false
-}));
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
+//this replaces the body-parser package
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(sessions({
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }));
+app.use(passport.initialize());
+app.use(passport.session()); //persistent login sessions;
 
 //Connect Mongoose 
 mongoose.connect(MONGODB_URI, {
@@ -39,6 +44,8 @@ db.on('error', (err) => {
 });
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
+
+
 
 //CONTROLLERS
 const budgetDetailsController = require('./controllers/budget_details_controller.js');
@@ -64,3 +71,5 @@ app.get('/', (req, res) => {
 
 //LISTEN
 app.listen(PORT, () => console.log('Listening on port:', PORT));
+
+//https://medium.com/@adamlehrer/get-your-passport-through-security-with-passport-js-bcrypt-c44f70ac7159
