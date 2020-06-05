@@ -34,6 +34,7 @@ budgetplans.get('/new', isAuthenticated, (req, res) => {
 
 //POST
 budgetplans.post('/', (req, res) => {
+  req.body.user = (req.session.currentUser)._id
   BudgetPlan.create(req.body, (err, createdPlan) => {
     res.redirect('/budgetdetails')
   })
