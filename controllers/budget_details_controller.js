@@ -41,6 +41,7 @@ budgetdetails.get('/new', isAuthenticated, (req, res) => {
 
 //CREATE
 budgetdetails.post('/', (req, res) => {
+  req.body.user = (req.session.currentUser)._id
   BudgetDetail.create(req.body, (err, createdDetail) => {
     res.redirect('/budgetdetails')
   })
