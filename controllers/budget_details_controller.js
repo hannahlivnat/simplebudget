@@ -2,6 +2,8 @@
 const express = require('express');
 const BudgetDetail = require('../models/budgetdetail.js');
 const budgetdetails = express.Router();
+const BudgetPlan = require('../models/budgetplan.js');
+
 
 //CHECK THAT USER IS LOGGED IN
 const isAuthenticated = (req, res, next) => {
@@ -22,7 +24,7 @@ budgetdetails.get('/', isAuthenticated, (req, res) => {
       budgetDetails: allReports,
       pageName: 'Budget Summary',
       currentUser: req.session.currentUser,
-      budgetPlan: req.budgetPlan
+      budgetPlan: BudgetPlan[0]
     })
   })
 });

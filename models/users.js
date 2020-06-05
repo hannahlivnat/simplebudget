@@ -20,7 +20,15 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  budgetplan: {
+    type: Schema.Types.ObjectId,
+    ref: 'BudgetPlan'
+  },
+  budgetdetails: [{
+    type: Schema.Types.ObjectId,
+    ref: 'BudgetDetail'
+  }]
 });
 
 //apply uniqueValidator plugin to userSchema - checks for unique username

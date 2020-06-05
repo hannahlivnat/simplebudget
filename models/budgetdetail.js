@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
+
+
 const budgetDetailsSchema = new mongoose.Schema({
   date: {
     type: Date,
@@ -17,6 +20,10 @@ const budgetDetailsSchema = new mongoose.Schema({
   description: {
     type: String,
     required: false
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 }, {
   timestamps: true
