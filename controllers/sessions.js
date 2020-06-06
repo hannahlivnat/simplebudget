@@ -49,13 +49,26 @@ router.post('/sessions', (req, res) => {
             console.log(err);
           } else {
             req.session.currentbudgetplan = budgetplan;
-            if ((req.session.currentbudgetplan).length === 0) {
-              res.redirect('/budgetplans/new');
-            } else {
-              console.log(req.session.currentbudgetplan)
-              console.log(req.session);
-              res.redirect('/budgetdetails');
-            }
+
+            BudgetDetail.find({
+              user: req.session.userId
+            }).exec(
+              (err, budgetdetails) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  req.session.currentbudgetdetails = budgetdetails;
+                  if ((req.session.currentbudgetplan).length === 0) {
+                    res.redirect('/budgetplans/new');
+                  } else {
+                    console.log(req.session);
+                    res.redirect('/budgetdetails');
+                  }
+                }
+              }
+            )
+
+
           }
         });
     }
