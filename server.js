@@ -1,31 +1,36 @@
-//DEPENDENCIES
-const express = require('express');
-const mongoose = require('mongoose');
-const methodOverride = require('method-override');
-const sessions = require('express-session');
+//_______________________________________
+// SET UP MAIN APP'S TOOL BOX
+//_______________________________________
 
-//CONFIG
+//DEPENDENCIES ==========================
+const express = require('express');
+const methodOverride = require('method-override');
+const mongoose = require('mongoose');
+const session = require('express-session');
+
+//CONFIGURATION =========================
 require('dotenv').config();
 const app = express();
 const db = mongoose.connection;
 const PORT = process.env.PORT || 3333;
 const MONGODB_URI = process.env.MONGODB_URI;
 
-
-
-//MIDDLEWARE
+//MIDDLEWARE ===========================
+app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({
-  extended: false
+  extended: true
 }));
-app.use(express.static('public'));
-app.use(sessions({
+app.use(session({
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }));
 
-//Connect Mongoose 
+//_______________________________________
+// ESTABLISH DATABASE CONNECTIONS
+//_______________________________________
+//CONNECT MONGOOSE TO MONGODB ===========
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -33,34 +38,42 @@ mongoose.connect(MONGODB_URI, {
   useCreateIndex: true
 });
 
-//Error or Success Message
+//SEND FEEDBACK ON CONNECTION ============
 db.on('error', (err) => {
   console.log(err.message + 'is Mongod not running?');
 });
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
-//CONTROLLERS
-const budgetDetailsController = require('./controllers/budget_details_controller.js');
+//_______________________________________
+// CONNECT TO ALL ROUTER FILES
+//_______________________________________
+//USERS
+const usersController = require('./controllers/users');
+app.use('/', usersController);
+
+//SESSIONS
+const sessionsController = require('./controllers/sessions');
+app.use('/', sessionsController);
+
+//BUDGET DETAILS
+const budgetDetailsController = require('./controllers/budgetdetails');
 app.use('/budgetdetails', budgetDetailsController);
 
-const usersController = require('./controllers/users_controller.js');
-app.use('/users', usersController);
-
-const sessionsController = require('./controllers/sessions_controller.js');
-app.use('/sessions', sessionsController);
-
-const budgetPlansController = require('./controllers/budget_plans_controller.js');
+//BUDGET PLANS
+const budgetPlansController = require('./controllers/budgetplans');
 app.use('/budgetplans', budgetPlansController);
 
-//___________________
-// Routes
-//___________________
-//localhost:3000
+//_______________________________________
+// REDIRECT FROM MAIN ROUTE
+//_______________________________________
+//lOCALHOST:3000
 app.get('/', (req, res) => {
   res.redirect('/budgetdetails');
 });
 
 
-//LISTEN
+//_______________________________________
+// TELL APP WHICH PORT TO LISTEN TO 
+//_______________________________________
 app.listen(PORT, () => console.log('Listening on port:', PORT));
