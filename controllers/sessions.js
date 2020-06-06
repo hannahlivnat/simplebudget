@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt');
 //CONNECT USER DATABASE
 const User = require('../models/user');
 const BudgetPlan = require('../models/budgetplan');
-const BudgetDetail = requires('../models/budgetdetail');
+const BudgetDetail = require('../models/budgetdetail');
 
 //_______________________________________
 // LOG IN AND LOG OUT OF SESSION - ROUTES
@@ -42,8 +42,8 @@ router.post('/sessions', (req, res) => {
       req.session.userId = foundUser._id;
 
       BudgetPlan.find({
-          user: req.session.userId
-        },
+        user: req.session.userId
+      }).limit(1).exec(
         (err, budgetplan) => {
           if (err) {
             console.log(err);
@@ -57,11 +57,7 @@ router.post('/sessions', (req, res) => {
               res.redirect('/budgetdetails');
             }
           }
-
-        }
-      )
-
-
+        });
     }
   })
 });

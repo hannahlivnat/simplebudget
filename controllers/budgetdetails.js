@@ -15,12 +15,21 @@ const isAuthenticated = (req, res, next) => {
   }
 }
 
+//MAKE SURE USER DOESN'T HAVE BUDGET PLAN ALREADY
+const doesUserHaveBudgetPlan = (req, res, next) => {
+  if ((req.session.currentbudgetplan).length > 0) {
+    next()
+  } else {
+    res.redirect('/budgetplans/new')
+  }
+};
+
 //_______________________________________
 // BUDGET DETAILS ROUTES
 //_______________________________________
 
 //SIMPLY BUDGET HOME PAGE AFTER LOG IN -- INDEX ROUTE
-router.get('/', isAuthenticated, (req, res) => {
+router.get('/', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   BudgetDetail.find({}, (err, allReports) => {
     res.render('budgetdetails/index.ejs', {
       budgetDetails: allReports,
@@ -32,7 +41,7 @@ router.get('/', isAuthenticated, (req, res) => {
 });
 
 //NEW
-router.get('/new', isAuthenticated, (req, res) => {
+router.get('/new', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   console.log(req.session);
   res.render('budgetdetails/new.ejs', {
     pageName: 'Create New Budget Item',
@@ -60,7 +69,7 @@ router.post('/', (req, res) => {
 });
 
 //EDIT
-router.get('/:id/edit', isAuthenticated, (req, res) => {
+router.get('/:id/edit', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     res.render('budgetdetails/edit.ejs', {
       budgetItem: foundItem,
@@ -79,7 +88,7 @@ router.put('/:id', (req, res) => {
 });
 
 //SHOW
-router.get('/:id', isAuthenticated, (req, res) => {
+router.get('/:id', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     res.render('budgetdetails/show.ejs', {
       budgetItem: foundItem,
