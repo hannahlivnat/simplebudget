@@ -30,13 +30,11 @@ const doesUserHaveBudgetPlan = (req, res, next) => {
 
 //SIMPLY BUDGET HOME PAGE AFTER LOG IN -- INDEX ROUTE
 router.get('/', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
-  BudgetDetail.find({}, (err, allReports) => {
-    res.render('budgetdetails/index.ejs', {
-      budgetDetails: allReports,
-      pageName: 'Budget Summary',
-      currentUser: req.session.currentUser,
-      budgetplan: req.session.currentbudgetplan
-    })
+  res.render('budgetdetails/index.ejs', {
+    pageName: 'Budget Summary',
+    budgetdetails: req.session.currentbudgetdetails,
+    currentUser: req.session.currentUser,
+    budgetplan: req.session.currentbudgetplan
   })
 });
 
@@ -63,6 +61,7 @@ router.post('/', (req, res) => {
     if (err) {
       res.send(err)
     } else {
+      req.session.currentbudgetdetails.push(createdDetail)
       res.redirect('/budgetdetails')
     }
   })

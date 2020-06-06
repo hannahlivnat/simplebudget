@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const budgetPlanSchema = new mongoose.Schema({
-  _id: Schema.Types.ObjectId,
   expectedincome: {
     type: Number,
     required: true
