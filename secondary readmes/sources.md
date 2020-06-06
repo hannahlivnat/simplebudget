@@ -7,3 +7,7 @@
 
 ## passing variables / requiring modules
 * https://www.freecodecamp.org/news/requiring-modules-in-node-js-everything-you-need-to-know-e7fbd119be8/
+
+
+## req.session
+* https://thecodebarbarian.com/how-find-works-in-mongoose

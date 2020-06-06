@@ -42,6 +42,7 @@ router.post('/', (req, res) => {
     "user": req.session.userId
   }
   BudgetPlan.create(newBudgetPlan, (err, createdPlan) => {
+    res.session.budgetPlan = createdPlan
     res.redirect('/budgetdetails')
   })
 });

@@ -9,7 +9,8 @@ const bcrypt = require('bcrypt');
 
 
 //CONNECT USER DATABASE
-const User = require('../models/user')
+const User = require('../models/user');
+const BudgetPlan = require('../models/budgetplan');
 
 //_______________________________________
 // LOG IN AND LOG OUT OF SESSION - ROUTES
@@ -36,16 +37,27 @@ router.post('/sessions', (req, res) => {
     } else if (bcrypt.compareSync(req.body.password, foundUser.password)) {
       req.session.currentUser = foundUser;
       req.session.userId = foundUser._id;
-      res.redirect('/budgetdetails')
-    } else {
-      res.send('combining the user and password messages did not work')
+
+      BudgetPlan.find({
+          user: req.session.userId
+        },
+        (err, budgetplan) => {
+          if (err) {
+            console.log(err);
+          } else {
+            req.session.currentBudgetPlan = budgetplan;
+            res.send(req.session.currentBudgetPlan);
+          }
+
+        }
+      )
     }
   })
 });
 
 
 //END LOGGED-IN SESSION ---- DESTROY ROUTE
-router.delete('/', (req, res) => {
+router.delete('/sessions', (req, res) => {
   req.session.destroy(() => {
     res.redirect('/budgetdetails')
   })

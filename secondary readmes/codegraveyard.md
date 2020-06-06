@@ -1,5 +1,5 @@
 ```
-//===========================================RIP CODE========================================================
+//=====================RIP CODE==============================
   // sessions_controller.js
   // User.findOne({
   //   username: req.body.username
@@ -132,5 +132,60 @@ app.post('/', passport.authenticate('local', {
   failureRedirect: '/login',
   failureFlash: true
 }));
+
+
+//still sessions, trying to locate budget plan through user id and load it into the session
+
+      BudgetPlan.findOne({
+        user: req.session.userId
+      }, (err, foundBudgetPlan) => {
+        if (err) {
+          res.send(err)
+        } else {
+          if (foundBudgetPlan === 'undefined' || foundBudgetPlan === 'null') {
+            res.session.budgetPlan = null
+            res.redirect('/budgetplans/new')
+          } else {
+            req.session.budgetPlan = foundBudgetPlan
+            console.log(req.session.budgetPlan)
+            res.redirect('/budgetdetails')
+          }
+        }
+
+      })
+
+      BudgetPlan.find({
+          user: req.session.userId
+        })
+        .limit(1)
+        .catch(err => {
+          console.log('Caught: ', err.message);
+        })
+        .then(budgetplan => {
+          if (!budgetplan) {
+            res.session.budgetplan = null;
+            console.log(res.session.budgetplan);
+            res.redirect('/budgetplans/new');
+          } else {
+            res.session.budgetplan = budgetplan;
+            console.log(res.session.budgetplan);
+            res.redirect('/budgetdetails');
+          }
+        })
+
+          // if (err) {
+          //   res.send(err);
+          // } else {
+          //   if (!budgetplan) {
+          //     req.session.budgetplan = null;
+          //     console.log(res.session.budgetplan);
+          //     res.redirect('/budgetplans/new');
+          //   } else {
+          //     req.session.budgetplan = budgetplan;
+          //     console.log(res.session.budgetplan);
+          //     res.redirect('/budgetdetails');
+          //   }
+          // }
+
 
 ```
