@@ -11,6 +11,7 @@ const bcrypt = require('bcrypt');
 //CONNECT USER DATABASE
 const User = require('../models/user');
 const BudgetPlan = require('../models/budgetplan');
+const BudgetDetail = requires('../models/budgetdetail');
 
 //_______________________________________
 // LOG IN AND LOG OUT OF SESSION - ROUTES
@@ -59,6 +60,8 @@ router.post('/sessions', (req, res) => {
 
         }
       )
+
+
     }
   })
 });

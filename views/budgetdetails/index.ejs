@@ -69,12 +69,12 @@
         <tbody>
           <tr>
             <td>Income</td>
-            <td>$0</td>
+            <td>$<%=budgetplan[0].expectedincome%></td>
             <td>$<%= totalIncome %></td>
           </tr>
           <tr>
             <td>Firm Expense</td>
-            <td>$0</td>
+            <td>$<%=budgetplan[0].expectedfirmexpenses%></td>
             <td>
               <%const firmExpenseTotal = calculateTotal('firm-expense');%>
               $<%=firmExpenseTotal%>
@@ -82,7 +82,7 @@
           </tr>
           <tr>
             <td>Flex Expenses</td>
-            <td>$0</td>
+            <td>$<%=budgetplan[0].expectedflexexpenses%></td>
             <td>
               <%const flexExpenseTotal = calculateTotal('flex-expense');%>
               $<%=flexExpenseTotal%>

@@ -15,6 +15,15 @@ const isAuthenticated = (req, res, next) => {
   }
 }
 
+//MAKE SURE USER DOESN'T HAVE BUDGET PLAN ALREADY
+const doesUserHaveBudgetPlan = (req, res, next) => {
+  if ((req.session.currentbudgetplan).length > 0) {
+    res.send("You already have a budget plan!")
+  } else {
+    next();
+  }
+}
+
 //_______________________________________
 // ROUTES
 //_______________________________________
@@ -24,16 +33,16 @@ router.get('/', isAuthenticated, (req, res) => {
   res.render('/budgetplans/index.ejs', {
     pageName: 'Budget Plan',
     currentUser: req.session.currentUser,
-    budgetPlan: req.session.currentbudgetplan
+    budgetplan: req.session.currentbudgetplan
   })
 });
 
 //NEW
-router.get('/new', isAuthenticated, (req, res) => {
+router.get('/new', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   res.render('budgetplans/new.ejs', {
     pageName: 'New Budget Plan',
     currentUser: req.session.currentUser,
-    budgetPlan: req.session.currentbudgetplan
+    budgetplan: req.session.currentbudgetplan
   })
 });
 

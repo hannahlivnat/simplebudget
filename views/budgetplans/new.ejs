@@ -11,7 +11,6 @@
 
   <div class="container">
     <h1>Create a Budget Plan</h1>
-    <a href="#" class="center">About Your Budget Plan</a>
     <div class="row">
       <form class="col s12" action="/budgetplans" method="POST">
         <div class="row">
@@ -37,6 +36,37 @@
         </div>
       </form>
     </div>
+    <hr>
+    <h2>About Your Budget Plan</h2>
+
+    <p>This budget plan is designed for simplicity, so there are only three categories that you need to plan: Income,
+      Flex Expenses, and Firm Expenses!</p>
+    <ul>
+      <li><span class="material-icons">
+          monetization_on
+        </span> Income - Any source of money the you gain falls into this category, whether it be your paycheck or a
+        gift</li>
+      <li><span class="material-icons">
+          add_shopping_cart
+        </span>Flex Expenses - These are any expenses which you change from month to month. This category includes
+        grocery
+        shopping, restaurants, clothing,
+        movies, travel, gas, and anything else that you spend a varying amount of money on. We place this all in one
+        category to give you a greater understanding
+        of how much your actually spending and to provide greater flexibility for everything life throws your way. This
+        is the expense category that you'll want to keep
+        a closer eye on during the month!
+      </li>
+      <li><span class="material-icons">
+          house
+        </span>Firm Expenses - These are any expenses that remain the same from month to month. This category includes
+        your
+        rent or mortgage, health insurance, car payments,
+        a monthly cleaning service with set fees, your phone bill, internet, electricity. There's not much that will
+        change these bills on a month to month basis, so we throw
+        them into your firm expenses.
+      </li>
+    </ul>
   </div>
   <%- include('../partials/footer.ejs')%>
 </body>
