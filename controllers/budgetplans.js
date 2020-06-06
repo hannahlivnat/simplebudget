@@ -1,10 +1,12 @@
-//SET UP
+//_______________________________________
+// SET UP BUDGET PLANS TOOL BOX
+//_______________________________________
 const express = require('express');
 const router = express.Router();
 
 const BudgetPlan = require('../models/budgetplan.js');
 
-//CHECK THAT USER IS LOGGED IN
+//CHECK THAT USER IS LOGGED IN ----------
 const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
     return next();
@@ -12,16 +14,17 @@ const isAuthenticated = (req, res, next) => {
     res.redirect('/login');
   }
 }
-//ROUTES
+
+//_______________________________________
+// ROUTES
+//_______________________________________
 
 //INDEX
 router.get('/', isAuthenticated, (req, res) => {
-  BudgetPlan.get({}, (err, allPlan) => {
-    res.render('/budgetplans/index.ejs', {
-      pageName: 'Budget Plan',
-      currentUser: req.session.currentUser,
-      budgetPlan: allPlan
-    })
+  res.render('/budgetplans/index.ejs', {
+    pageName: 'Budget Plan',
+    currentUser: req.session.currentUser,
+    budgetPlan: req.session.currentbudgetplan
   })
 });
 
@@ -30,6 +33,7 @@ router.get('/new', isAuthenticated, (req, res) => {
   res.render('budgetplans/new.ejs', {
     pageName: 'New Budget Plan',
     currentUser: req.session.currentUser,
+    budgetPlan: req.session.currentbudgetplan
   })
 });
 
@@ -42,10 +46,12 @@ router.post('/', (req, res) => {
     "user": req.session.userId
   }
   BudgetPlan.create(newBudgetPlan, (err, createdPlan) => {
-    res.session.budgetPlan = createdPlan
+    req.session.currentbudgetplan = createdPlan
     res.redirect('/budgetdetails')
   })
 });
 
-//EXPORT
+//_______________________________________
+// EXPORT BUDGETPLANS
+//_______________________________________
 module.exports = router;

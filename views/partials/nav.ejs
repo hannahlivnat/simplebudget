@@ -14,8 +14,13 @@
   <li>
     <a href="/signup">Sign Up</a>
   </li>
-  <% } %>
+  <% } 
+  
+  if(budgetplan) {%>
+  <li><a href="/budgetplans/<%=budgetplan.id%>/edit">Edit Budget Plan</a></li>
+  <% } else { %>
   <li><a href="/budgetplans/new">Create Budget Plan</a></li>
+  <% } %>
 </ul>
 <nav>
   <div class="nav-wrapper">

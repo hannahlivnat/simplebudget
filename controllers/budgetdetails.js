@@ -1,9 +1,12 @@
-//set up
+//_______________________________________
+// SET UP BUDGET DETAILS TOOL BOX
+//_______________________________________
 const express = require('express');
 const router = express.Router();
 const BudgetDetail = require('../models/budgetdetail.js');
 const BudgetPlan = require('../models/budgetplan.js');
-//CHECK THAT USER IS LOGGED IN
+
+//CHECK THAT USER IS LOGGED IN---------
 const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
     return next();
@@ -11,27 +14,33 @@ const isAuthenticated = (req, res, next) => {
     res.redirect('/login');
   }
 }
-//ROUTES
-//INDEX
+
+//_______________________________________
+// BUDGET DETAILS ROUTES
+//_______________________________________
+
+//SIMPLY BUDGET HOME PAGE AFTER LOG IN -- INDEX ROUTE
 router.get('/', isAuthenticated, (req, res) => {
-  // res.send("I'm finally reachable")
   BudgetDetail.find({}, (err, allReports) => {
     res.render('budgetdetails/index.ejs', {
       budgetDetails: allReports,
       pageName: 'Budget Summary',
       currentUser: req.session.currentUser,
-      budgetPlan: BudgetPlan[0]
+      budgetplan: req.session.currentbudgetplan
     })
   })
 });
+
 //NEW
 router.get('/new', isAuthenticated, (req, res) => {
-  // res.send("I'm the new page")
+  console.log(req.session);
   res.render('budgetdetails/new.ejs', {
     pageName: 'Create New Budget Item',
-    currentUser: req.session.currentUser
+    currentUser: req.session.currentUser,
+    budgetplan: req.session.currentbudgetplan
   })
 });
+
 //CREATE
 router.post('/', (req, res) => {
   const newBudgetItem = {
@@ -49,36 +58,46 @@ router.post('/', (req, res) => {
     }
   })
 });
+
 //EDIT
 router.get('/:id/edit', isAuthenticated, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     res.render('budgetdetails/edit.ejs', {
       budgetItem: foundItem,
       pageName: 'Edit Item Details',
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      budgetPlan: req.session.currentbudgetplan
     })
   })
 });
+
 //UPDATE
 router.put('/:id', (req, res) => {
   BudgetDetail.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
     res.redirect(`/budgetdetails/${updatedItem.id}`);
   })
 });
+
 //SHOW
 router.get('/:id', isAuthenticated, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     res.render('budgetdetails/show.ejs', {
       budgetItem: foundItem,
       pageName: 'Budget Item Details',
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      budgetPlan: req.session.currentbudgetplan
     })
   })
 });
+
 //DELETE
 router.delete('/:id', (req, res) => {
   BudgetDetail.findByIdAndRemove(req.params.id, (err, budgetItem) => {
     res.redirect('/budgetdetails/')
   })
 });
+
+//_______________________________________
+// EXPORT BUDGET DETAILS
+//_______________________________________
 module.exports = router;

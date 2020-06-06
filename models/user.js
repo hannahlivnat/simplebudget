@@ -31,7 +31,8 @@ const userSchema = new Schema({
   }]
 });
 
-//apply uniqueValidator plugin to userSchema - checks for unique username
+//APPLY UNIQUEVALIDATOR TO USERSCHAME 
+//CHECKS FOR UNIQUE USERNAME
 userSchema.plugin(uniqueValidator, {
   message: 'Sorry, {PATH} needs to be unique'
 });

@@ -21,6 +21,8 @@ router.get('/login', (req, res) => {
   res.render('sessions/login.ejs', {
     pageName: 'Log In Page',
     currentUser: req.session.currentUser,
+    budgetplan: req.session.currentbudgetplan
+
   })
 });
 
@@ -45,11 +47,12 @@ router.post('/sessions', (req, res) => {
           if (err) {
             console.log(err);
           } else {
-            req.session.currentBudgetPlan = budgetplan;
-            // res.send(req.session.currentBudgetPlan);
-            if ((req.session.currentBudgetPlan).length === 0) {
+            req.session.currentbudgetplan = budgetplan;
+            if ((req.session.currentbudgetplan).length === 0) {
               res.redirect('/budgetplans/new');
             } else {
+              console.log(req.session.currentbudgetplan)
+              console.log(req.session);
               res.redirect('/budgetdetails');
             }
           }
