@@ -46,7 +46,12 @@ router.post('/sessions', (req, res) => {
             console.log(err);
           } else {
             req.session.currentBudgetPlan = budgetplan;
-            res.send(req.session.currentBudgetPlan);
+            // res.send(req.session.currentBudgetPlan);
+            if ((req.session.currentBudgetPlan).length === 0) {
+              res.redirect('/budgetplans/new');
+            } else {
+              res.redirect('/budgetdetails');
+            }
           }
 
         }
