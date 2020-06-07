@@ -30,12 +30,12 @@ __Project Due Date:__ June 10
 * authentication: x
   * create users and sessions x
 * Have third database: budget goals. Create new and edit routes for budget goals
-* about page: 
-  * linked to in index page
-  * will describe app and its purpose
+* about page: x
+  * will describe app and its purpose x
+* Figure out how to use passport and express-flash for signing in and persistent log in sessions
 * CSS - get all CSS/Sass done
 * relate the user data to the financial data so the financial data is unique to the user
-* Use CSS framework - materialize
+* Use CSS framework - materialize x
 * Another category - debts: 
   * create a third database and other accompying files for tracking debt and debt payments
 * Make a month feature so that budget changes/refreshes each month and you're able to go back to previous months to view your past budget outcomes.

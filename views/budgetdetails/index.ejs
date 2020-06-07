@@ -26,7 +26,34 @@
     }
     return total;
   }
+
+  const colorCode = (expectedamount, realamount) => {
+    if (parseInt(expectedamount) - parseInt(realamount) > 0) {
+      return 'greenColor';
+    } else {
+      return 'redColor';
+    }
+  }
   %>
+
+  <%
+  <!-- Variables Used In Page  -->
+  const totalIncome = calculateTotal('income');
+  const totalExpense = calculateMultipleTotals('flex-expense', 'firm-expense');
+  const firmExpenseTotal = calculateTotal('firm-expense');
+  const flexExpenseTotal = calculateTotal('flex-expense');
+  const expectedIncome = budgetplan[0].expectedincome;
+  const expectedFirmExpenses = budgetplan[0].expectedfirmexpenses;
+  const expectedFlexExpenses = budgetplan[0].expectedflexexpenses;
+  const totalExpectedExpense = parseInt(expectedFirmExpenses) + parseInt(expectedFlexExpenses);
+  
+  const actualTotalColorClass = colorCode(expectedIncome, totalIncome);
+
+  const actualFirmExpenseColorClass = colorCode(expectedFirmExpenses, firmExpenseTotal);
+
+  const actualFlexExpenseColorClass = colorCode(expectedFlexExpenses, flexExpenseTotal);
+  %>
+
   <%- include('../partials/nav.ejs')%>
   <div class="container">
     <h1 class="center">Hello, <%= currentUser.firstname %>! Here's Your Budget Overview for this Month.</h1>
@@ -35,7 +62,6 @@
         <div class="col s6 center">
           <h2>TOTAL EARNED</h2>
           <h3 class="center">
-            <%const totalIncome = calculateTotal('income');%>
             $<%=totalIncome%>
           </h3>
         </div>
@@ -44,7 +70,6 @@
         <div class="col s6 center">
           <h2>TOTAL SPENT</h2>
           <h3 class="center">
-            <%const totalExpense = calculateMultipleTotals('flex-expense', 'firm-expense')%>
             $<%=totalExpense%></h3>
         </div>
       </span>
@@ -61,22 +86,20 @@
         <tbody>
           <tr>
             <td>Income</td>
-            <td>$<%=budgetplan[0].expectedincome%></td>
-            <td>$<%= totalIncome %></td>
+            <td>$<%=expectedIncome%></td>
+            <td class="<%=actualTotalColorClass%>">$<%= totalIncome %></td>
           </tr>
           <tr>
             <td>Firm Expense</td>
-            <td>$<%=budgetplan[0].expectedfirmexpenses%></td>
-            <td>
-              <%const firmExpenseTotal = calculateTotal('firm-expense');%>
+            <td>$<%=expectedFirmExpenses%></td>
+            <td class="<%=actualFirmExpenseColorClass%>">
               $<%=firmExpenseTotal%>
             </td>
           </tr>
           <tr>
             <td>Flex Expenses</td>
-            <td>$<%=budgetplan[0].expectedflexexpenses%></td>
-            <td>
-              <%const flexExpenseTotal = calculateTotal('flex-expense');%>
+            <td>$<%=expectedFlexExpenses%></td>
+            <td class="actualFlexExpenseColorClass">
               $<%=flexExpenseTotal%>
             </td>
           </tr>
@@ -98,7 +121,7 @@
         <li class="row">
           <p class="col s5"><%= newDate %></p>
           <p class="col s5">$<%= budgetItem.amount %></p>
-          <a class="col s2" href="/budgetdetails/<%= budgetItem.id %>">See More Details</a>
+          <a class="col s2" href="/budgetdetails/<%= budgetItem._id %>">See More Details</a>
         </li>
         <%
           }

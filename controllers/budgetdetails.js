@@ -74,33 +74,39 @@ router.get('/:id/edit', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
       budgetItem: foundItem,
       pageName: 'Edit Item Details',
       currentUser: req.session.currentUser,
-      budgetPlan: req.session.currentbudgetplan
+      budgetplan: req.session.currentbudgetplan
     })
   })
 });
 
-//UPDATE
+//UPDATE - works
 router.put('/:id', (req, res) => {
   BudgetDetail.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
-    res.redirect(`/budgetdetails/${updatedItem.id}`);
+    res.redirect(`/budgetdetails/${updatedItem._id}`);
   })
 });
 
-//SHOW
+//SHOW - works
 router.get('/:id', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
-    res.render('budgetdetails/show.ejs', {
-      budgetItem: foundItem,
-      pageName: 'Budget Item Details',
-      currentUser: req.session.currentUser,
-      budgetPlan: req.session.currentbudgetplan
-    })
+    if (err) {
+      res.send(err.message)
+    } else {
+      res.render('budgetdetails/show.ejs', {
+        budgetItem: foundItem,
+        pageName: 'Budget Item Details',
+        currentUser: req.session.currentUser,
+        budgetplan: req.session.currentbudgetplan
+      })
+    }
+
   })
 });
 
 //DELETE
 router.delete('/:id', (req, res) => {
   BudgetDetail.findByIdAndRemove(req.params.id, (err, budgetItem) => {
+    req.session.currentbudgetdetails
     res.redirect('/budgetdetails/')
   })
 });

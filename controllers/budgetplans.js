@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
     if (err) {
       res.send(err.message)
     } else {
-      req.session.currentbudgetplan = createdPlan;
+      (req.session.currentbudgetplan).push(createdPlan);
       console.log(req.session.currentbudgetplan);
       res.redirect('/budgetdetails')
     }
