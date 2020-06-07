@@ -93,19 +93,35 @@ router.get('/:id/edit', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
       budgetItem: foundItem,
       pageName: 'Edit Item Details',
       currentUser: req.session.currentUser,
-      budgetplan: req.session.currentUser.budgetplan
+      budgetplan: req.session.currentUser.budgetplan,
+      budgetdetails: req.session.currentUser.budgetdetails,
+
     })
   })
 });
 
 //UPDATE - works
 router.put('/:id', (req, res) => {
-  BudgetDetail.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
-    const currentUserBudgetDetails = req.session.currentUser.budgetdetails;
-    const updateThisOne = currentUserBudgetDetails.indexOf(updatedItem._id);
 
-    res.redirect(`/budgetdetails/${updatedItem._id}`);
-  })
+  BudgetDetail.findById(req.params.id, (err, budgetItem) => {
+    if (err) {
+      console.log(err);
+
+    } else {
+      BudgetDetail.findByIdAndUpdate(req.params.id, req.body, {
+        new: true
+      }, (err, updatedItem) => {
+        let budgetArray = req.session.currentUser.budgetdetails
+        let updateThisOne = budgetArray.findIndex(x => x._id === req.params.id)
+        console.log(updateThisOne);
+        console.log(updatedItem);
+        req.session.currentUser[updateThisOne] = updatedItem;
+        budgetArray.splice(updateThisOne, 1, updatedItem);
+        res.redirect(`/budgetdetails/${updatedItem._id}`);
+      })
+    }
+  });
+
 });
 
 //SHOW - works
@@ -114,8 +130,6 @@ router.get('/:id', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
     if (err) {
       res.send(err.message)
     } else {
-      console.log(req.session.currentUser.budgetdetails);
-
       res.render('budgetdetails/show.ejs', {
         budgetItem: foundItem,
         pageName: 'Budget Item Details',

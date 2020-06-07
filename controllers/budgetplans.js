@@ -93,7 +93,16 @@ router.get('/:id/edit', isAuthenticated, (req, res) => {
 
 //UPDATE
 router.put('/:id', (req, res) => {
-  BudgetPlan.findByIdAndUpdate(req.params.id, req.body, (err, updatedPlan) => {
+  BudgetPlan.findByIdAndUpdate(req.params.id, req.body, {
+    new: true
+  }, (err, updatedPlan) => {
+    let budgetArray = req.session.currentUser.budgetplan
+    let updateThisOne = budgetArray.findIndex(x => x._id === req.params.id)
+    console.log(updateThisOne);
+    console.log(updatedPlan);
+    req.session.currentUser[updateThisOne] = updatedPlan;
+    budgetArray.splice(updateThisOne, 1, updatedPlan);
+
     res.redirect('/budgetdetails/');
   })
 });
