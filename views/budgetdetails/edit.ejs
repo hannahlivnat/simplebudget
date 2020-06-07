@@ -8,7 +8,7 @@
   <div class="container">
     <h1>Edit to Your Income / Expenses</h1>
     <div class="row">
-      <form class="col s12" action="/budgetdetails/<%=budgetItem.id%>?_method=PUT" method="post">
+      <form class="col s12" action="/budgetdetails/<%=budgetItem.id%>?_method=PUT" method="POST">
         <div class="row">
           <div class="input-field col s6">
             <input type="text" name="date" class="datepicker" value="<%=budgetItem.date%>" required />

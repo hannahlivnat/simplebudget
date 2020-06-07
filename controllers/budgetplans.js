@@ -5,6 +5,8 @@ const express = require('express');
 const router = express.Router();
 
 const BudgetPlan = require('../models/budgetplan.js');
+const User = require('../models/user');
+
 
 //CHECK THAT USER IS LOGGED IN ----------
 const isAuthenticated = (req, res, next) => {
@@ -28,15 +30,6 @@ const doesUserHaveBudgetPlan = (req, res, next) => {
 // ROUTES
 //_______________________________________
 
-//INDEX
-router.get('/', isAuthenticated, (req, res) => {
-  res.render('/budgetplans/index.ejs', {
-    pageName: 'Budget Plan',
-    currentUser: req.session.currentUser,
-    budgetplan: req.session.currentbudgetplan
-  })
-});
-
 //NEW
 router.get('/new', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   res.render('budgetplans/new.ejs', {
@@ -58,14 +51,50 @@ router.post('/', (req, res) => {
     if (err) {
       res.send(err.message)
     } else {
+      //push into req.session
       (req.session.currentbudgetplan).push(createdPlan);
-      console.log(req.session.currentbudgetplan);
-      res.redirect('/budgetdetails')
+      req.session.currentUser.budgetplan.push(createdPlan);
+
+      User.findByIdAndUpdate(req.session.userId, {
+        $push: {
+          budgetplan: createdPlan._id
+        }
+      }, {
+        safe: true,
+        upsert: true
+      }, (err, doc) => {
+        if (err) {
+          res.send(err.message)
+        } else {
+          console.log(req.session.currentUser);
+          res.redirect('/budgetdetails')
+        }
+      })
+
     }
 
   })
 });
 
+//EDIT
+
+router.get('/:id/edit', isAuthenticated, (req, res) => {
+  BudgetPlan.findById(req.params.id, (err, foundPlan) => {
+    res.render('budgetplans/edit.ejs', {
+      budgetPlan: foundPlan,
+      pageName: 'Edit Budget Plan',
+      currentUser: req.session.currentUser,
+      budgetplan: req.session.currentbudgetplan
+    })
+  })
+})
+
+//UPDATE
+router.put('/:id', (req, res) => {
+  BudgetPlan.findByIdAndUpdate(req.params.id, req.body, (err, updatedPlan) => {
+    res.redirect('/budgetdetails/');
+  })
+});
 //_______________________________________
 // EXPORT BUDGETPLANS
 //_______________________________________

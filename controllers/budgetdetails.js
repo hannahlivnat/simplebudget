@@ -30,12 +30,13 @@ const doesUserHaveBudgetPlan = (req, res, next) => {
 //_______________________________________
 
 //SIMPLY BUDGET HOME PAGE AFTER LOG IN -- INDEX ROUTE
+
 router.get('/', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   res.render('budgetdetails/index.ejs', {
     pageName: 'Budget Summary',
-    budgetdetails: req.session.currentbudgetdetails,
+    budgetdetails: req.session.currentUser.budgetdetails,
     currentUser: req.session.currentUser,
-    budgetplan: req.session.currentbudgetplan
+    budgetplan: req.session.currentUser.budgetplan
   })
 });
 
@@ -44,7 +45,7 @@ router.get('/new', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   res.render('budgetdetails/new.ejs', {
     pageName: 'Create New Budget Item',
     currentUser: req.session.currentUser,
-    budgetplan: req.session.currentbudgetplan
+    budgetplan: req.session.currentUser.budgetplan
   })
 });
 
@@ -62,12 +63,11 @@ router.post('/', (req, res) => {
       res.send(err)
     } else {
       //push into req.session
-      req.session.currentbudgetdetails.push(createdDetail)
-      req.session.currentUser.budgetdetails.push(createdDetail.id);
-      //try to push into user array
+      req.session.currentUser.budgetdetails.push(createdDetail);
+      //push into user array
       User.findByIdAndUpdate(req.session.userId, {
         $push: {
-          budgetdetails: createdDetail
+          budgetdetails: createdDetail._id
         }
       }, {
         safe: true,
@@ -76,7 +76,7 @@ router.post('/', (req, res) => {
         if (err) {
           res.send(err.message);
         } else {
-          console.log(req.session);
+          console.log(req.session.currentUser);
           res.redirect('/budgetdetails')
 
         }
@@ -125,8 +125,26 @@ router.get('/:id', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
 //DELETE
 router.delete('/:id', (req, res) => {
   BudgetDetail.findByIdAndRemove(req.params.id, (err, budgetItem) => {
-    req.session.currentbudgetdetails
-    res.redirect('/budgetdetails/')
+    if (err) {
+      console.log(err.message);
+    } else {
+      (req.session.currentUser.budgetdetails).pull(budgetItem._id);
+      User.findByIdAndUpdate(req.session.userId, {
+        $pull: {
+          budgetdetails: budgetItem
+        }
+      }, {
+        safe: true,
+        upsert: true
+      }, (err, success) => {
+        if (err) {
+          console.log(err.message);
+
+        } else {
+          res.redirect('/budgetdetails')
+        }
+      })
+    }
   })
 });
 

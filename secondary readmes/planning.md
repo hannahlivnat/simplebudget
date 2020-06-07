@@ -45,22 +45,24 @@ __Project Due Date:__ June 10
 ## Project Benchmarks
 
 __By Wednesday end of day:__
-* Have data structure figured out - relationship between user and financial data, how it's stored. Complete the data schemas and test.
+* Have data structure figured out - relationship between user and financial data, how it's stored. Complete the data schemas and test. x
 
 __By Thursday end of day:__
 * Have RESTful routes complete and views completed for both users, sessions, and budget data. Start debugging any remaining errors x
 
 __By Friday end of day:__ 
-* Have third database and routes complete for budget goals
-* If the databases are not related already, figure out how to relate them.
+* Have third database and routes complete for budget goals 
+
 
 __By Saturday End of Day:__
-* Create About Page 
+* Create About Page x
 * Style the pages - materialize and Sass
+* If the databases are not related already, figure out how to relate them.
 
 __By Monday End of Day:__
-* Figure out how to add debt and debt payment
-* Keep working on styling
+* Style Everything
+* Go through all routes and complete testing for at least two different users and with newly created user
+* Fix remaining bugs, make sure function is good before getting nit-picky with styling
 
 __By Tuesday End of Day:__
 * Project is complete

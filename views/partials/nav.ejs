@@ -17,7 +17,7 @@
   <% } 
   
   if(budgetplan.length > 0) {%>
-  <li><a href="/budgetplans/<%=budgetplan.id%>/edit">Edit Budget Plan</a></li>
+  <li><a href="/budgetplans/<%= budgetplan[0]._id %>/edit">Edit Budget Plan</a></li>
   <% } else { %>
   <li><a href="/budgetplans/new">Create Budget Plan</a></li>
   <% } %>
