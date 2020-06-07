@@ -38,8 +38,10 @@ router.post('/sessions', (req, res) => {
     } else if (!foundUser || !bcrypt.compareSync(req.body.password, foundUser.password)) {
       res.send('Sorry, your username or password is incorrect');
     } else if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+
       req.session.currentUser = foundUser;
       req.session.userId = foundUser._id;
+
 
       BudgetPlan.find({
         user: req.session.userId

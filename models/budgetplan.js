@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('./user');
 
 const budgetPlanSchema = new mongoose.Schema({
   expectedincome: {
@@ -16,7 +17,8 @@ const budgetPlanSchema = new mongoose.Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   }
 }, {
   timestamps: true

@@ -3,8 +3,9 @@
 //_______________________________________
 const express = require('express');
 const router = express.Router();
-const BudgetDetail = require('../models/budgetdetail.js');
-const BudgetPlan = require('../models/budgetplan.js');
+const BudgetDetail = require('../models/budgetdetail');
+const BudgetPlan = require('../models/budgetplan');
+const User = require('../models/user');
 
 //CHECK THAT USER IS LOGGED IN---------
 const isAuthenticated = (req, res, next) => {
@@ -40,7 +41,6 @@ router.get('/', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
 
 //NEW
 router.get('/new', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
-  console.log(req.session);
   res.render('budgetdetails/new.ejs', {
     pageName: 'Create New Budget Item',
     currentUser: req.session.currentUser,
@@ -61,8 +61,27 @@ router.post('/', (req, res) => {
     if (err) {
       res.send(err)
     } else {
+      //push into req.session
       req.session.currentbudgetdetails.push(createdDetail)
-      res.redirect('/budgetdetails')
+      req.session.currentUser.budgetdetails.push(createdDetail.id);
+      //try to push into user array
+      User.findByIdAndUpdate(req.session.userId, {
+        $push: {
+          budgetdetails: createdDetail
+        }
+      }, {
+        safe: true,
+        upsert: true
+      }, (err, doc) => {
+        if (err) {
+          res.send(err.message);
+        } else {
+          console.log(req.session);
+          res.redirect('/budgetdetails')
+
+        }
+      })
+
     }
   })
 });

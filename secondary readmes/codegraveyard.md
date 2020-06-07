@@ -187,5 +187,17 @@ app.post('/', passport.authenticate('local', {
           //   }
           // }
 
+//trying to get populate to work again
+      let user = foundUser;
+      user.populate("BudgetPlan").exec(function (err, budgetplan) {
+        if (err) {
+          res.send(err.message)
+        } else {
+          console.log('The budget plan is ', budgetplan);
+
+        }
+      })
+      // populate budgetdetails and budgetplan here
+      foundUser.populate('budgetplans').populate('budgetdetailss').execPopulate();
 
 ```

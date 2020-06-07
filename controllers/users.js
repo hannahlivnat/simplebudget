@@ -13,7 +13,6 @@ const User = require('../models/user.js');
 
 //SIGN UP FOR ACCOUNT --------- NEW ROUTE
 router.get('/signup', (req, res) => {
-  // res.send('Hello, I am New!')
   res.render('users/signup.ejs', {
     pageName: 'Sign Up Page',
     currentUser: req.session.currentUser,
@@ -24,9 +23,9 @@ router.get('/signup', (req, res) => {
 //CREATE USER ACCOUNT ------- CREATE ROUTE
 router.post('/users', (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-  User.create(req.body, (err, createdUser) => {
+  User.create(req.body, (err, newUser) => {
     if (err) {
-      res.send('username is not unique');
+      res.send(err.message);
     } else {
       res.redirect('/login')
     }

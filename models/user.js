@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
+const BudgetPlan = require('./budgetplan');
+const BudgetDetail = require('./budgetdetail');
 
 const userSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   firstname: {
     type: String,
     required: true,
@@ -21,13 +22,13 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  budgetplan: {
+  budgetplan: [{
     type: Schema.Types.ObjectId,
-    ref: 'BudgetPlan'
-  },
+    ref: 'BudgetPlan',
+  }],
   budgetdetails: [{
     type: Schema.Types.ObjectId,
-    ref: 'BudgetDetail'
+    ref: 'BudgetDetail',
   }]
 });
 
