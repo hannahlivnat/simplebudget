@@ -20,7 +20,7 @@ const isAuthenticated = (req, res, next) => {
 //MAKE SURE USER DOESN'T HAVE BUDGET PLAN ALREADY
 const doesUserHaveBudgetPlan = (req, res, next) => {
   if ((req.session.currentUser.budgetplan).length > 0) {
-    res.send("You already have a budget plan!")
+    res.redirect(`/budgetplans/${req.session.currentUser.budgetplan[0]._id}/edit`)
   } else {
     next();
   }
