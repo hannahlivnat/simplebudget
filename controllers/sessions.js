@@ -27,6 +27,13 @@ router.get('/login', (req, res) => {
 
 //ESTABLISH LOGIN SESSION IF SUCCESSFUL ---- CREATE ROUTE
 router.post('/sessions', (req, res) => {
+  const currentDate = new Date();
+  const mindate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 31);
+  console.log(mindate);
+
+  const maxdate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+  console.log(maxdate);
+
   User.findOne({
     username: req.body.username
   }, (err, foundUser) => {
@@ -37,11 +44,19 @@ router.post('/sessions', (req, res) => {
       res.send('Sorry, your username or password is incorrect');
     } else if (bcrypt.compareSync(req.body.password, foundUser.password)) {
       foundUser.populate('budgetplan').execPopulate();
-      foundUser.populate('budgetdetails').execPopulate();
+      foundUser.populate({
+        path: 'budgetdetails',
+        match: {
+          date: {
+            $gt: mindate,
+            $lt: maxdate
+          }
+        }
+      }).execPopulate();
       req.session.currentUser = foundUser;
       req.session.userId = foundUser._id;
 
-      //It doesn't seem like I should need this section, but when I take it out, my budget plan and budget details
+      //It doesn't seem like I shouldn't need this section, but when I take it out, my budget plan and budget details
       //won't populate (??????????)
       BudgetPlan.find({
         user: req.session.userId
@@ -58,9 +73,6 @@ router.post('/sessions', (req, res) => {
                 if (err) {
                   console.log(err);
                 } else {
-                  // req.session.currentbudgetdetails = budgetdetails;
-                  console.log(req.session);
-
                   if ((budgetplan).length === 0) {
                     res.redirect('/budgetplans/new');
                   } else {
