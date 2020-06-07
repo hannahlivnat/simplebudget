@@ -16,7 +16,8 @@
       }
     }
     return total;
-  }
+  };
+
   const calculateMultipleTotals = (itemcategory1, itemcategory2) => {
     let total = 0;
     for (budgetItem of budgetdetails) {
@@ -25,7 +26,7 @@
       }
     }
     return total;
-  }
+  };
 
   const colorCode = (expectedamount, realamount) => {
     if (parseInt(expectedamount) - parseInt(realamount) > 0) {
@@ -33,8 +34,18 @@
     } else {
       return 'redColor';
     }
-  }
+  };
+
+  const getCurrentMonth = () => {
+    const monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'December'];
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const monthString = monthArray[currentMonth];
+    return monthString;
+  };
   %>
+
+
 
   <%
   <!-- Variables Used In Page  -->
@@ -52,11 +63,13 @@
   const actualFirmExpenseColorClass = colorCode(expectedFirmExpenses, firmExpenseTotal);
 
   const actualFlexExpenseColorClass = colorCode(expectedFlexExpenses, flexExpenseTotal);
+
+  const currentMonth = getCurrentMonth();
   %>
 
   <%- include('../partials/nav.ejs')%>
   <div class="container">
-    <h1 class="center">Hello, <%= currentUser.firstname %>! Here's Your Budget Overview for this Month.</h1>
+    <h1 class="center">Hello, <%= currentUser.firstname %>! Here's Your Budget Overview for <%=currentMonth%>.</h1>
     <div class="row">
       <span>
         <div class="col s6 center">
