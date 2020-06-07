@@ -22,8 +22,6 @@ router.get('/login', (req, res) => {
   res.render('sessions/login.ejs', {
     pageName: 'Log In Page',
     currentUser: req.session.currentUser,
-    budgetplan: req.session.currentbudgetplan
-
   })
 });
 
@@ -43,7 +41,8 @@ router.post('/sessions', (req, res) => {
       req.session.currentUser = foundUser;
       req.session.userId = foundUser._id;
 
-
+      //It doesn't seem like I should need this section, but when I take it out, my budget plan and budget details
+      //won't populate (??????????)
       BudgetPlan.find({
         user: req.session.userId
       }).limit(1).exec(
@@ -51,8 +50,7 @@ router.post('/sessions', (req, res) => {
           if (err) {
             console.log(err);
           } else {
-            req.session.currentbudgetplan = budgetplan;
-
+            // req.session.currentbudgetplan = budgetplan;
             BudgetDetail.find({
               user: req.session.userId
             }).exec(
@@ -60,10 +58,10 @@ router.post('/sessions', (req, res) => {
                 if (err) {
                   console.log(err);
                 } else {
-                  req.session.currentbudgetdetails = budgetdetails;
+                  // req.session.currentbudgetdetails = budgetdetails;
                   console.log(req.session);
 
-                  if ((req.session.currentbudgetplan).length === 0) {
+                  if ((budgetplan).length === 0) {
                     res.redirect('/budgetplans/new');
                   } else {
                     res.redirect('/budgetdetails');
@@ -71,8 +69,6 @@ router.post('/sessions', (req, res) => {
                 }
               }
             )
-
-
           }
         });
     }

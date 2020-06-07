@@ -199,5 +199,36 @@ app.post('/', passport.authenticate('local', {
       })
       // populate budgetdetails and budgetplan here
       foundUser.populate('budgetplans').populate('budgetdetailss').execPopulate();
+      BudgetPlan.find({
+        user: req.session.userId
+      }).limit(1).exec(
+        (err, budgetplan) => {
+          if (err) {
+            console.log(err);
+          } else {
+            // req.session.currentbudgetplan = budgetplan;
+
+            BudgetDetail.find({
+              user: req.session.userId
+            }).exec(
+              (err, budgetdetails) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  // req.session.currentbudgetdetails = budgetdetails;
+                  console.log(req.session);
+
+                  if ((budgetplan).length === 0) {
+                    res.redirect('/budgetplans/new');
+                  } else {
+                    res.redirect('/budgetdetails');
+                  }
+                }
+              }
+            )
+          }
+        });
+    }
+  })
 
 ```

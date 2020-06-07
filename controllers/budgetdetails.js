@@ -18,7 +18,7 @@ const isAuthenticated = (req, res, next) => {
 
 //MAKE SURE USER DOESN'T HAVE BUDGET PLAN ALREADY
 const doesUserHaveBudgetPlan = (req, res, next) => {
-  if ((req.session.currentbudgetplan).length > 0) {
+  if ((req.session.currentUser.budgetplan).length > 0) {
     next()
   } else {
     res.redirect('/budgetplans/new')
@@ -93,7 +93,7 @@ router.get('/:id/edit', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
       budgetItem: foundItem,
       pageName: 'Edit Item Details',
       currentUser: req.session.currentUser,
-      budgetplan: req.session.currentbudgetplan
+      budgetplan: req.session.currentUser.budgetplan
     })
   })
 });
@@ -101,6 +101,9 @@ router.get('/:id/edit', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
 //UPDATE - works
 router.put('/:id', (req, res) => {
   BudgetDetail.findByIdAndUpdate(req.params.id, req.body, (err, updatedItem) => {
+    const currentUserBudgetDetails = req.session.currentUser.budgetdetails;
+    const updateThisOne = currentUserBudgetDetails.indexOf(updatedItem._id);
+
     res.redirect(`/budgetdetails/${updatedItem._id}`);
   })
 });
@@ -111,11 +114,14 @@ router.get('/:id', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
     if (err) {
       res.send(err.message)
     } else {
+      console.log(req.session.currentUser.budgetdetails);
+
       res.render('budgetdetails/show.ejs', {
         budgetItem: foundItem,
         pageName: 'Budget Item Details',
+        budgetdetails: req.session.currentUser.budgetdetails,
         currentUser: req.session.currentUser,
-        budgetplan: req.session.currentbudgetplan
+        budgetplan: req.session.currentUser.budgetplan
       })
     }
 
@@ -128,10 +134,16 @@ router.delete('/:id', (req, res) => {
     if (err) {
       console.log(err.message);
     } else {
-      (req.session.currentUser.budgetdetails).pull(budgetItem._id);
+      let budgetArray = req.session.currentUser.budgetdetails
+      console.log(budgetArray);
+      //Got help from Tim Clay on deleting the budget item from the req.session.currentUser
+      let removeThisObject = budgetArray.indexOf(budgetItem._id)
+      budgetArray.splice(removeThisObject, 1);
       User.findByIdAndUpdate(req.session.userId, {
         $pull: {
-          budgetdetails: budgetItem
+          budgetdetails: {
+            "_id": budgetItem._id
+          }
         }
       }, {
         safe: true,

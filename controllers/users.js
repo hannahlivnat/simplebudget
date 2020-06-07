@@ -16,7 +16,6 @@ router.get('/signup', (req, res) => {
   res.render('users/signup.ejs', {
     pageName: 'Sign Up Page',
     currentUser: req.session.currentUser,
-    budgetplan: req.session.currentbudgetplan
   })
 });
 
