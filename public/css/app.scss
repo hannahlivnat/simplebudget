@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Serif&family=Poppins:wght@700');
+
+//IMPORT VARIABLES AND MIXINS FIRST
+@import 'color';
+@import 'font';
+@import 'layout';
+@import 'mixin';
+
+
+
+//IMPORT ALL PARTIAL FILES
+@import 'navcss';
+@import 'login';
+@import 'showpage';
+
+//ALL PAGES
+body {
+  background-color: $whitesmoke;
+}
+
+table {
+  th {
+    text-align: center;
+  }
+}
+
+
+
+
+//BUDGET DETAILS INDEX PAGE
+.redColor {
+  color: red;
+}
+
+.greenColor {
+  color: green;
+}
+

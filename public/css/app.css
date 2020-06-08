@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Serif&family=Poppins:wght@700");
+nav {
+  background-color: #1263ba;
+}
+
+.nonuser-nav {
+  margin-bottom: 0;
+}
+
+.nav-wrapper {
+  width: 98%;
+  margin: auto;
+}
+
+.nav-wrapper .brand-logo {
+  font-family: "Poppins", sans-serif;
+  font-size: 6vw;
+}
+
+.nav-wrapper li {
+  font-family: "PT Sans", sans-serif;
+}
+
+.nav-wrapper .desktop-nav-ul li {
+  margin: 0 1vw;
+}
+
+.sidenav li {
+  margin: 1vh auto;
+  text-align: center;
+}
+
+.sidenav input {
+  display: block;
+  margin: 1vh auto;
+}
+
+.login-header {
+  background-color: #1263ba;
+  width: 100%;
+  padding: 5vh 0 10vh 0;
+}
+
+.login-header h2 {
+  padding: 1vh 0 3vh 0;
+  margin: 0 auto;
+  color: white;
+  font-family: "PT Sans", sans-serif;
+  font-size: 10vw;
+  letter-spacing: 0.02vw;
+}
+
+.login-form {
+  margin-top: -5vh;
+  border-radius: 10px;
+  padding: 10px;
+  -webkit-box-shadow: 2px 2px 4px #c4c5c4;
+          box-shadow: 2px 2px 4px #c4c5c4;
+  background-color: white;
+  color: #2d3543;
+}
+
+.login-form:hover {
+  padding: 60px 0;
+}
+
+.login-form h4 {
+  -webkit-transform: uppercase;
+  transform: uppercase;
+  text-align: left;
+  font-family: "PT Sans", sans-serif;
+  font-size: 6vw;
+  margin: 2vh 0 0 2vw;
+}
+
+.login-form .row {
+  width: 95%;
+  margin: auto;
+}
+
+.login-form .btn-small {
+  background-color: #1263ba;
+  width: 40%;
+  display: block;
+  margin: auto;
+}
+
+.login-form p {
+  font-family: "PT Serif", serif;
+  font-size: 3vw;
+}
+
+.login-form p a {
+  color: #2d3543;
+}
+
+.login-form p a:hover {
+  cursor: pointer;
+  color: #265d7e;
+}
+
+.show-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 100px auto 1fr;
+      grid-template-rows: 100px auto 1fr;
+  -ms-grid-columns: 100%;
+      grid-template-columns: 100%;
+      grid-template-areas: "." "card" ".";
+}
+
+.card {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: card;
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+table th {
+  text-align: center;
+}
+
+.redColor {
+  color: red;
+}
+
+.greenColor {
+  color: green;
+}
+/*# sourceMappingURL=app.css.map */

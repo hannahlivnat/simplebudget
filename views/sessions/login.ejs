@@ -7,12 +7,15 @@
 
 <body>
   <%- include('../partials/nonusernav.ejs') %>
-
+  <header class="login-header">
+    <h2 class="center">Welcome Back!</h2>
+  </header>
   <div class="container">
     <div class="row">
-      <form class="col s12" action="/sessions" method="POST">
-        <h2 class="center">Welcome Back!</h2>
+      <form class="col s12 login-form" action="/sessions" method="POST">
         <div class="row">
+          <h4>LogIn : </h4>
+
           <div class="input-field col s12">
             <input type="text" name="username" id="username" />
             <label for="username">Username</label>
@@ -25,12 +28,13 @@
           </div>
         </div>
         <div class="row">
-          <input class="btn col s4" type="submit" value="Log In">
+          <input class="btn-small center" type="submit" value="Log In">
+        </div>
+        <div class="row">
+          <p>Don't Have an Account? <span><a href="/signup">Register.</a></span></p>
+
         </div>
       </form>
-      <li>
-        <a href="/signup">Sign Up Instead</a>
-      </li>
     </div>
   </div>
   <%- include('../partials/footer.ejs')%>

@@ -1,0 +1,6 @@
+//mixins for vendor prefixes
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}

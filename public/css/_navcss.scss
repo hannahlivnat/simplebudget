@@ -1,0 +1,40 @@
+//NAV.EJS
+nav {
+  background-color: $bright-dark-blue;
+}
+
+.nonuser-nav {
+  margin-bottom: 0;
+}
+
+.nav-wrapper {
+  width: 98%;
+  margin: auto;
+
+  .brand-logo {
+    font-family: $Poppins;
+    font-size: 6vw;
+  }
+
+  li {
+    font-family: $PT-Sans;
+  }
+
+  .desktop-nav-ul {
+    li {
+      margin: 0 1vw;
+    }
+  }
+}
+
+.sidenav {
+  li {
+    margin: 1vh auto;
+    text-align: center;
+  }
+
+  input {
+    display: block;
+    margin: 1vh auto;
+  }
+}

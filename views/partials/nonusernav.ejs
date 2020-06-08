@@ -7,11 +7,12 @@
     <a href="/signup">Sign Up</a>
   </li>
 </ul>
-<nav>
+<nav class="nonuser-nav">
   <div class="nav-wrapper">
-    <a class="left" href="/budgetdetails"><img src="https://img.icons8.com/doodle/40/000000/bank.png" /></a>
     <h4 class="brand-logo">SimplyBudget</h4>
-    <ul class="right">
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+    <ul class="right hide-on-med-and-down desktop-nav-ul">
       <li>
         <a href="/about">About SimplyBudget</a>
       </li>
@@ -21,3 +22,17 @@
 
   </div>
 </nav>
+
+<!-- mobile nav links -->
+
+<ul class="sidenav" id="mobile-demo">
+  <li>
+    <a href="/about">About SimplyBudget</a>
+  </li>
+  <li>
+    <a href="/login">Log In</a>
+  </li>
+  <li>
+    <a href="/signup">Sign Up</a>
+  </li>
+</ul>

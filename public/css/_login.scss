@@ -1,0 +1,64 @@
+//LOG IN PAGE 
+.login-header {
+  background-color: $bright-dark-blue;
+  width: 100%;
+  padding: 5vh 0 10vh 0;
+
+  h2 {
+    padding: $font-padding-vh;
+    margin: $margin0auto;
+    color: $white;
+    font-family: $PT-Sans;
+    font-size: $mobile-lg-size;
+    letter-spacing: $md-lg-spacing;
+  }
+}
+
+.login-form {
+  margin-top: -5vh;
+  border-radius: $form-border-radius;
+  padding: 10px;
+  box-shadow: $box-shadow;
+  background-color: $white;
+  color: $chalkboard-black;
+
+  &:hover {
+    padding: 60px 0;
+  }
+
+  h4 {
+    @include transform(uppercase);
+    text-align: left;
+    font-family: $PT-Sans;
+    font-size: $mobile-md-size;
+    margin: $font-margin-top-left;
+  }
+
+  .row {
+    width: 95%;
+    margin: $marginauto;
+  }
+
+  .btn-small {
+    background-color: $bright-dark-blue;
+    width: 40%;
+    display: block;
+    margin: $marginauto;
+  }
+
+  p {
+    font-family: $PT-Serif;
+    font-size: $mobile-sm-size;
+
+    a {
+      color: $chalkboard-black;
+
+      &:hover {
+        cursor: pointer;
+        color: $darker-blue;
+      }
+    }
+
+  }
+
+}
