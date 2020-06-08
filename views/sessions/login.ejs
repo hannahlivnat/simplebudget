@@ -6,35 +6,35 @@
 </head>
 
 <body>
-  <%- include('../partials/nonusernav.ejs') %>
-  <header class="login-header">
-    <h2 class="center">Welcome Back!</h2>
-  </header>
-  <div class="container">
-    <div class="row">
-      <form class="col s12 login-form" action="/sessions" method="POST">
-        <div class="row">
-          <h4>LogIn : </h4>
+  <div class="content">
+    <%- include('../partials/nonusernav.ejs') %>
+    <%- include('../partials/nonuserheader.ejs') %>
+    <div class="container">
+      <div class="row">
+        <form class="col s12 box-form" action="/sessions" method="POST">
+          <div class="row">
+            <h4>LogIn : </h4>
 
-          <div class="input-field col s12">
-            <input type="text" name="username" id="username" />
-            <label for="username">Username</label>
+            <div class="input-field col s12">
+              <input type="text" name="username" id="username" />
+              <label for="username">Username</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input type="password" name="password" id="password" class="validate" />
-            <label for="password">Password</label>
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="password" name="password" id="password" class="validate" />
+              <label for="password">Password</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <input class="btn-small center" type="submit" value="Log In">
-        </div>
-        <div class="row">
-          <p>Don't Have an Account? <span><a href="/signup">Register.</a></span></p>
+          <div class="row">
+            <input class="btn-small center" type="submit" value="Log In">
+          </div>
+          <div class="row">
+            <p>Don't Have an Account? <span><a href="/signup">Register.</a></span></p>
 
-        </div>
-      </form>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <%- include('../partials/footer.ejs')%>

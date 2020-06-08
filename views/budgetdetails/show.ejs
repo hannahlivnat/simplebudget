@@ -3,32 +3,34 @@
 <%- include('../partials/head.ejs')%>
 
 <body>
-  <%- include('../partials/nav.ejs')%>
+  <div class="content">
+    <%- include('../partials/nav.ejs')%>
 
-  <div class="container show-container">
-    <div class="card">
-      <div class="card-content">
-        <h4 class="center"><%=budgetItem.description%></h4>
-      </div>
-      <div class="card-tabs row">
-        <ul class="tabs tabs-fixed-width">
-          <li class="tab"><a class="active" href="#amount">Amount</a></li>
-          <li class="tab"><a href="#category">Category</a></li>
-          <li class="tab"><a href="#date">Date</a></li>
-          <li class="tab"><a href="#change">Change / Delete</a></li>
-        </ul>
-      </div>
-      <div class="card-content grey lighten-4">
-        <div id="amount"><%=budgetItem.amount%></div>
-        <div id="category"><%=budgetItem.category%></div>
-        <div id="date"><%=budgetItem.date%></div>
-        <div id="change">
-          <li><a href="/budgetdetails/<%=budgetItem.id%>/edit">Edit Details</a></li>
-          <li>
-            <form action="/budgetdetails/<%=budgetItem.id%>?_method=DELETE" method="POST">
-              <input type="submit" value="Delete This Expense / Income">
-            </form>
-          </li>
+    <div class="container show-container">
+      <div class="card">
+        <div class="card-content">
+          <h4 class="center"><%=budgetItem.description%></h4>
+        </div>
+        <div class="card-tabs row">
+          <ul class="tabs tabs-fixed-width">
+            <li class="tab"><a class="active" href="#amount">Amount</a></li>
+            <li class="tab"><a href="#category">Category</a></li>
+            <li class="tab"><a href="#date">Date</a></li>
+            <li class="tab"><a href="#change">Change / Delete</a></li>
+          </ul>
+        </div>
+        <div class="card-content grey lighten-4">
+          <div id="amount"><%=budgetItem.amount%></div>
+          <div id="category"><%=budgetItem.category%></div>
+          <div id="date"><%=budgetItem.date%></div>
+          <div id="change">
+            <li><a href="/budgetdetails/<%=budgetItem.id%>/edit">Edit Details</a></li>
+            <li>
+              <form action="/budgetdetails/<%=budgetItem.id%>?_method=DELETE" method="POST">
+                <input type="submit" value="Delete This Expense / Income">
+              </form>
+            </li>
+          </div>
         </div>
       </div>
     </div>

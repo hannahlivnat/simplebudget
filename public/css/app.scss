@@ -12,11 +12,21 @@
 @import 'navcss';
 @import 'login';
 @import 'showpage';
+@import 'footer';
 
 //ALL PAGES
+html {
+  height: 100%;
+}
+
 body {
+  @include transition(all .2s linear);
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
   background-color: $whitesmoke;
 }
+
 
 table {
   th {
@@ -35,4 +45,3 @@ table {
 .greenColor {
   color: green;
 }
-

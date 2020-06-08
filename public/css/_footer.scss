@@ -1,0 +1,17 @@
+footer {
+  grid-row-start: 2;
+  grid-row-end: 3;
+
+  a {
+    padding: $font-margin-bottom-left;
+    color: $chalkboard-black;
+    font-size: $xs-size;
+    transition: all .3s;
+
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+      color: $darker-blue;
+    }
+  }
+}

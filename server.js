@@ -79,13 +79,6 @@ app.get('/', (req, res) => {
   res.redirect('/budgetdetails');
 });
 
-app.get('/about', (req, res) => {
-  res.render('about.ejs', {
-    pageName: 'About SimplyBudget'
-  });
-});
-
-
 //_______________________________________
 // TELL APP WHICH PORT TO LISTEN TO 
 //_______________________________________
