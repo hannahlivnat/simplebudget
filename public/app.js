@@ -6,6 +6,14 @@ $(() => {
 
   $('select').formSelect();
 
+  // https://github.com/Dogfalo/materialize/issues/1861 <-- fixes bug that causes select to not display require message
+  $('select[required]').css({
+    display: "inline",
+    height: 0,
+    padding: 0,
+    width: 0
+  })
+
   $(".dropdown-trigger").dropdown();
 
   //interactive date picker

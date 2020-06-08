@@ -15,21 +15,22 @@
       <form class="col s12" action="/budgetplans/<%=budgetPlan.id%>?_method=PUT" method="POST">
         <div class="row">
           <div class="input-field col s12">
-            <input type="number" name="expectedincome" id="expectedincome" value="<%=budgetPlan.expectedincome%>">
+            <input type="number" name="expectedincome" id="expectedincome" value="<%=budgetPlan.expectedincome%>"
+              required />
             <label for="expectedincome"> What is your expected income? </label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input type="number" name="expectedflexexpenses" id="expectedflexexpenses"
-              value="<%=budgetPlan.expectedflexexpenses%>" />
+              value="<%=budgetPlan.expectedflexexpenses%>" required />
             <label for="expectedflexexpenses">What is your total budget for Flex Expenses?</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input type="number" name="expectedfirmexpenses" id="expectedfirmexpenses"
-              value="<%=budgetPlan.expectedfirmexpenses%>" />
+              value="<%=budgetPlan.expectedfirmexpenses%>" required />
             <label for="expectedfirmexpenses">What is your total budget for Firm Expenses?</label>
           </div>
         </div>

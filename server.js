@@ -7,6 +7,10 @@ const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
+const PassportConfig = require('./config/passport-config');
 
 //CONFIGURATION =========================
 require('dotenv').config();
@@ -26,6 +30,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 //_______________________________________
 // ESTABLISH DATABASE CONNECTIONS

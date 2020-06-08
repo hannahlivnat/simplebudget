@@ -6,12 +6,54 @@ const router = express.Router();
 
 //TOOLS FOR USER AUTHENTICATION UPON LOGIN
 const bcrypt = require('bcrypt');
+const passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
 
 
-//CONNECT USER DATABASE
+//CONNECT USER DATABASE ===============
 const User = require('../models/user');
 const BudgetPlan = require('../models/budgetplan');
 const BudgetDetail = require('../models/budgetdetail');
+
+//CONFIGURE PASSPORT ===================
+// app.use(passport.initialize());
+// app.use(passport.session());
+// app.use(flash());
+
+passport.use(new LocalStrategy(
+  (username, password, done) => {
+    User.findOne({
+      username: username
+    }, (err, user) => {
+      if (err) {
+        return done(err)
+      }
+      if (!user) {
+        return done(null, false)
+      }
+      if (!bcrypt.compareSync(password, user.password)) {
+        return done(null, false)
+      }
+      //this should set 'req.user' to the user object after authentication
+      return done(null, user);
+    })
+  }));
+
+
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    if (err) {
+      return done(err)
+    }
+    done(null, user)
+  })
+});
+
 
 //_______________________________________
 // LOG IN AND LOG OUT OF SESSION - ROUTES
@@ -26,23 +68,27 @@ router.get('/login', (req, res) => {
 });
 
 //ESTABLISH LOGIN SESSION IF SUCCESSFUL ---- CREATE ROUTE
-router.post('/sessions', (req, res) => {
-  const currentDate = new Date();
-  const mindate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 31);
-  console.log(mindate);
+router.post('/sessions', passport.authenticate('local', {
+    failureRedirect: '/login'
+  }),
+  (req, res) => {
+    const currentDate = new Date();
+    const mindate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 31);
+    console.log(mindate);
 
-  const maxdate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
-  console.log(maxdate);
+    const maxdate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+    console.log(maxdate);
 
-  User.findOne({
-    username: req.body.username
-  }, (err, foundUser) => {
-    if (err) {
-      console.log(err);
-      res.send('Our database ran into a problem, our fault!')
-    } else if (!foundUser || !bcrypt.compareSync(req.body.password, foundUser.password)) {
-      res.send('Sorry, your username or password is incorrect');
-    } else if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+    User.findOne({
+      username: req.body.username
+    }, (err, foundUser) => {
+      if (err) {
+        console.log(err);
+        res.send('Our database ran into a problem, our fault!')
+      }
+      // } else if (!foundUser || !bcrypt.compareSync(req.body.password, foundUser.password)) {
+      //   res.send('Sorry, your username or password is incorrect');
+      // } else if (bcrypt.compareSync(req.body.password, foundUser.password)) {
       foundUser.populate('budgetplan').execPopulate();
       foundUser.populate({
         path: 'budgetdetails',
@@ -83,9 +129,8 @@ router.post('/sessions', (req, res) => {
             )
           }
         });
-    }
-  })
-});
+    })
+  });
 
 
 //END LOGGED-IN SESSION ---- DESTROY ROUTE

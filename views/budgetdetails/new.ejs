@@ -15,13 +15,13 @@
       <form class="col s12" action="/budgetdetails" method="post">
         <div class="row">
           <div class="input-field col s6">
-            <input type="text" name="date" class="datepicker" />
+            <input type="text" name="date" class="datepicker" required />
             <label for="date">Date</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <select name="category">
+            <select name="category" required>
               <option value="" disable selected>--Please choose an option--</option>
               <option value="income">Income</option>
               <option value="flex-expense">Flex Expense</option>
@@ -32,13 +32,13 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input type="number" name="amount" id="amount" />
+            <input type="number" name="amount" id="amount" required />
             <label for="amount">Amount</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" name="description" id="description" />
+            <input type="text" name="description" id="description" required />
             <label for="description">Description</label>
           </div>
         </div>
