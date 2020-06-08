@@ -15,7 +15,7 @@ const User = require('../models/user.js');
 router.get('/signup', (req, res) => {
   res.render('users/signup.ejs', {
     pageName: 'Sign Up Page',
-    currentUser: req.session.currentUser,
+    currentUser: req.session.user,
   })
 });
 

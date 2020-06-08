@@ -68,3 +68,15 @@ __By Tuesday End of Day:__
 * Project is complete
 * Try to figure out monthly feature
 * Put in local storage if needed / have time
+
+
+# Keeping Track ... 
+
+### main session and user variables
+
+* req.session.user
+* req.session.userId
+* req.session.user.budgetplan
+* req.session.user.budgetdetails
+
+

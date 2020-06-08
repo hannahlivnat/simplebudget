@@ -231,4 +231,90 @@ app.post('/', passport.authenticate('local', {
     }
   })
 
+
+
+    //   req.session.user
+  //     .populate('budgetplan')
+  //     .populate({
+  //       path: 'budgetdetails',
+  //       match: {
+  //         date: {
+  //           $gt: mindate,
+  //           $lt: maxdate
+  //         }
+  //       }
+  //     })
+  //     .execPopulate();
+
+  //   console.log(req.session.user);
+
+  //   if ((req.session.user).length === 0) {
+  //     res.redirect('/budgetplans/new')
+  //   } else {
+  //     res.redirect('/budgetdetails')
+  //   }
+
+
+  //   // User.findOne({
+  //   //   username: req.body.username
+  //   // }, (err, foundUser) => {
+  //   //   if (err) {
+  //   //     console.log(err);
+  //   //     res.send('Our database ran into a problem, our fault!')
+  //   //   }
+  //   //   req.user.populate('budgetplan').execPopulate();
+  //   //   req.user.populate({
+  //   //     path: 'budgetdetails',
+  //   //     match: {
+  //   //       date: {
+  //   //         $gt: mindate,
+  //   //         $lt: maxdate
+  //   //       }
+  //   //     }
+  //   //   }).execPopulate();
+
+  //   //   req.session.user = req.user;
+
+  //   //   console.log(req.session.user);
+
+  //   //   if ((req.user.budgetplan).length === 0) {
+  //   //     res.redirect('/budgetplans/new')
+  //   //   } else {
+  //   //     res.redirect('/budgetdetails')
+  //   //   }
+  //   // });
+
+  //   // req.session.currentUser = foundUser;
+  //   // req.session.userId = foundUser._id;
+
+  //   //It doesn't seem like I shouldn't need this section, but when I take it out, my budget plan and budget details
+  //   //won't populate (??????????)
+  //   // BudgetPlan.find({
+  //   //   user: req.session.userId
+  //   // }).limit(1).exec(
+  //   //   (err, budgetplan) => {
+  //   //     if (err) {
+  //   //       console.log(err);
+  //   //     } else {
+  //   //       // req.session.currentbudgetplan = budgetplan;
+  //   //       BudgetDetail.find({
+  //   //         user: req.session.userId
+  //   //       }).exec(
+  //   //         (err, budgetdetails) => {
+  //   //           if (err) {
+  //   //             console.log(err);
+  //   //           } else {
+  //   //             if ((budgetplan).length === 0) {
+  //   //               res.redirect('/budgetplans/new');
+  //   //             } else {
+  //   //               res.redirect('/budgetdetails');
+  //   //             }
+  //   //           }
+  //   //         }
+  //   //       )
+  //   //     }
+  //   //   });
+  //   // })
+  // });
+
 ```

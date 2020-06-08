@@ -9,7 +9,7 @@ const User = require('../models/user');
 
 //CHECK THAT USER IS LOGGED IN---------
 const isAuthenticated = (req, res, next) => {
-  if (req.session.currentUser) {
+  if (req.session.user) {
     return next();
   } else {
     res.redirect('/login');
@@ -18,7 +18,7 @@ const isAuthenticated = (req, res, next) => {
 
 //MAKE SURE USER DOESN'T HAVE BUDGET PLAN ALREADY
 const doesUserHaveBudgetPlan = (req, res, next) => {
-  if ((req.session.currentUser.budgetplan).length > 0) {
+  if ((req.session.user.budgetplan).length > 0) {
     next()
   } else {
     res.redirect('/budgetplans/new')
@@ -30,13 +30,12 @@ const doesUserHaveBudgetPlan = (req, res, next) => {
 //_______________________________________
 
 //SIMPLY BUDGET HOME PAGE AFTER LOG IN -- INDEX ROUTE
-
 router.get('/', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   res.render('budgetdetails/index.ejs', {
     pageName: 'Budget Summary',
-    budgetdetails: req.session.currentUser.budgetdetails,
-    currentUser: req.session.currentUser,
-    budgetplan: req.session.currentUser.budgetplan
+    budgetdetails: req.session.user.budgetdetails,
+    currentUser: req.session.user,
+    budgetplan: req.session.user.budgetplan
   })
 });
 
@@ -44,8 +43,8 @@ router.get('/', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
 router.get('/new', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   res.render('budgetdetails/new.ejs', {
     pageName: 'Create New Budget Item',
-    currentUser: req.session.currentUser,
-    budgetplan: req.session.currentUser.budgetplan
+    currentUser: req.session.user,
+    budgetplan: req.session.user.budgetplan
   })
 });
 
@@ -63,7 +62,7 @@ router.post('/', (req, res) => {
       res.send(err)
     } else {
       //push into req.session
-      req.session.currentUser.budgetdetails.push(createdDetail);
+      req.session.user.budgetdetails.push(createdDetail);
       //push into user array
       User.findByIdAndUpdate(req.session.userId, {
         $push: {
@@ -76,7 +75,7 @@ router.post('/', (req, res) => {
         if (err) {
           res.send(err.message);
         } else {
-          console.log(req.session.currentUser);
+          console.log(req.session.user);
           res.redirect('/budgetdetails')
 
         }
@@ -89,33 +88,35 @@ router.post('/', (req, res) => {
 //EDIT
 router.get('/:id/edit', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
-    res.render('budgetdetails/edit.ejs', {
-      budgetItem: foundItem,
-      pageName: 'Edit Item Details',
-      currentUser: req.session.currentUser,
-      budgetplan: req.session.currentUser.budgetplan,
-      budgetdetails: req.session.currentUser.budgetdetails,
+    if (err) {
+      console.log(err);
 
-    })
+    } else {
+      res.render('budgetdetails/edit.ejs', {
+        budgetItem: foundItem,
+        pageName: 'Edit Item Details',
+        currentUser: req.session.user,
+        budgetplan: req.session.user.budgetplan,
+        budgetdetails: req.session.user.budgetdetails,
+
+      })
+    }
   })
 });
 
 //UPDATE - works
 router.put('/:id', (req, res) => {
-
   BudgetDetail.findById(req.params.id, (err, budgetItem) => {
     if (err) {
       console.log(err);
-
     } else {
       BudgetDetail.findByIdAndUpdate(req.params.id, req.body, {
         new: true
       }, (err, updatedItem) => {
-        let budgetArray = req.session.currentUser.budgetdetails
+        let budgetArray = req.session.user.budgetdetails
         let updateThisOne = budgetArray.findIndex(x => x._id === req.params.id)
-        console.log(updateThisOne);
-        console.log(updatedItem);
-        req.session.currentUser[updateThisOne] = updatedItem;
+        //changed this
+        budgetArray[updateThisOne] = updatedItem;
         budgetArray.splice(updateThisOne, 1, updatedItem);
         res.redirect(`/budgetdetails/${updatedItem._id}`);
       })
@@ -133,9 +134,9 @@ router.get('/:id', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
       res.render('budgetdetails/show.ejs', {
         budgetItem: foundItem,
         pageName: 'Budget Item Details',
-        budgetdetails: req.session.currentUser.budgetdetails,
-        currentUser: req.session.currentUser,
-        budgetplan: req.session.currentUser.budgetplan
+        budgetdetails: req.session.user.budgetdetails,
+        currentUser: req.session.user,
+        budgetplan: req.session.user.budgetplan
       })
     }
 
@@ -148,9 +149,8 @@ router.delete('/:id', (req, res) => {
     if (err) {
       console.log(err.message);
     } else {
-      let budgetArray = req.session.currentUser.budgetdetails
+      let budgetArray = req.session.user.budgetdetails
       console.log(budgetArray);
-      //Got help from Tim Clay on deleting the budget item from the req.session.currentUser
       let removeThisObject = budgetArray.indexOf(budgetItem._id)
       budgetArray.splice(removeThisObject, 1);
       User.findByIdAndUpdate(req.session.userId, {

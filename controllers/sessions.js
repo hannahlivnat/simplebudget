@@ -17,9 +17,6 @@ const BudgetPlan = require('../models/budgetplan');
 const BudgetDetail = require('../models/budgetdetail');
 
 //CONFIGURE PASSPORT ===================
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(flash());
 
 passport.use(new LocalStrategy(
   (username, password, done) => {
@@ -30,10 +27,14 @@ passport.use(new LocalStrategy(
         return done(err)
       }
       if (!user) {
-        return done(null, false)
+        return done(null, false, {
+          message: 'Incorrect Password or Username'
+        })
       }
       if (!bcrypt.compareSync(password, user.password)) {
-        return done(null, false)
+        return done(null, false, {
+          message: 'Incorrect Password or Username'
+        })
       }
       //this should set 'req.user' to the user object after authentication
       return done(null, user);
@@ -63,7 +64,7 @@ passport.deserializeUser((id, done) => {
 router.get('/login', (req, res) => {
   res.render('sessions/login.ejs', {
     pageName: 'Log In Page',
-    currentUser: req.session.currentUser,
+    currentUser: req.session.user,
   })
 });
 
@@ -72,12 +73,11 @@ router.post('/sessions', passport.authenticate('local', {
     failureRedirect: '/login'
   }),
   (req, res) => {
+    req.session.user = req.user;
+
     const currentDate = new Date();
     const mindate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 31);
-    console.log(mindate);
-
     const maxdate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
-    console.log(maxdate);
 
     User.findOne({
       username: req.body.username
@@ -86,9 +86,6 @@ router.post('/sessions', passport.authenticate('local', {
         console.log(err);
         res.send('Our database ran into a problem, our fault!')
       }
-      // } else if (!foundUser || !bcrypt.compareSync(req.body.password, foundUser.password)) {
-      //   res.send('Sorry, your username or password is incorrect');
-      // } else if (bcrypt.compareSync(req.body.password, foundUser.password)) {
       foundUser.populate('budgetplan').execPopulate();
       foundUser.populate({
         path: 'budgetdetails',
@@ -99,7 +96,7 @@ router.post('/sessions', passport.authenticate('local', {
           }
         }
       }).execPopulate();
-      req.session.currentUser = foundUser;
+      req.session.user = foundUser;
       req.session.userId = foundUser._id;
 
       //It doesn't seem like I shouldn't need this section, but when I take it out, my budget plan and budget details
@@ -111,7 +108,6 @@ router.post('/sessions', passport.authenticate('local', {
           if (err) {
             console.log(err);
           } else {
-            // req.session.currentbudgetplan = budgetplan;
             BudgetDetail.find({
               user: req.session.userId
             }).exec(
