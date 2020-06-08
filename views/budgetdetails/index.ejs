@@ -69,7 +69,7 @@
 
   <%- include('../partials/nav.ejs')%>
   <div class="container">
-    <h1 class="center">Hello, <%= currentUser.firstname %>! Here's Your Budget Overview for <%=currentMonth%>.</h1>
+    <h2 class="center">Hello, <%= currentUser.firstname %>! Here's Your Budget Overview for <%=currentMonth%>:</h2>
     <div class="row">
       <span>
         <div class="col s6 center">
@@ -121,9 +121,18 @@
     </div>
     <hr>
     <div class="row">
-      <h4>Income</h4>
-      <ul class="col s12 collapsible">
-        <%
+      <table class="collapsible centered responsive-table highlight ">
+        <h4>Income</h4>
+
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>View | Edit | Delete</th>
+          </tr>
+        <tbody>
+          <%
         for (budgetItem of budgetdetails) {
           <!-- budgetItem.date = formatDate(budgetItem.date); -->
           if(budgetItem.category === 'income') {
@@ -131,58 +140,76 @@
             newDate = newDate.toDateString();
             
         %>
-        <li class="row">
-          <p class="col s5"><%= newDate %></p>
-          <p class="col s5">$<%= budgetItem.amount %></p>
-          <a class="col s2" href="/budgetdetails/<%= budgetItem._id %>">See More Details</a>
-        </li>
-        <%
+          <tr>
+            <td class="col s2"><%= newDate %></td>
+            <td class="col s2">$<%= budgetItem.amount %></td>
+            <td class="col s5"><%= budgetItem.description %></td>
+            <td class="col s3 btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td>
+          </tr>
+          <%
           }
         }
         %>
-      </ul>
+        </tbody>
     </div>
     <div class="row">
-      <h4>Flex Expenses</h4>
-      <ul class="col s12 collapsible">
-        <%
+      <table class="collapsible centered responsive-table highlight ">
+        <h4>Flex Expenses</h4>
+
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>View | Edit | Delete</th>
+        </tr>
+        <tbody>
+          <%
         for (budgetItem of budgetdetails) {
           <!-- budgetItem.date = formatDate(budgetItem.date); -->
           if(budgetItem.category === 'flex-expense') {
             let newDate = new Date(budgetItem.date);
             newDate = newDate.toDateString();
         %>
-        <li class="row">
-          <p class="col s5"><%= newDate %></p>
-          <p class="col s5">$<%= budgetItem.amount %></p>
-          <a class="col s2" href="/budgetdetails/<%= budgetItem._id %>">See More Details</a>
-        </li>
-        <%
+          <tr>
+            <td><%= newDate %></td>
+            <td>$<%= budgetItem.amount %></td>
+            <td><%= budgetItem.description %></td>
+            <td class="btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td>
+          </tr>
+          <%
           }
         }
         %>
-      </ul>
-    </div>
-    <div class="row">
-      <h4>Firm Expenses</h4>
-      <ul class="col s12 collapsible">
-        <%
+        </tbody>
+    </div class="row">
+    <div>
+      <table class="collapsible centered responsive-table highlight ">
+        <h4>Firm Expenses</h4>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>View | Edit | Delete</th>
+        </tr>
+        <tbody>
+          <%
         for (budgetItem of budgetdetails) {
           <!-- budgetItem.date = formatDate(budgetItem.date); -->
           if(budgetItem.category === 'firm-expense') {
             let newDate = new Date(budgetItem.date);
             newDate = newDate.toDateString();
         %>
-        <li class="row">
-          <p class="col s5"><%= newDate %></p>
-          <p class="col s5">$<%= budgetItem.amount %></p>
-          <a class="col s2" href="/budgetdetails/<%= budgetItem._id %>">See More Details</a>
-        </li>
-        <%
+          <tr>
+            <td><%= newDate %></td>
+            <td>$<%= budgetItem.amount %></td>
+            <td><%= budgetItem.description %></td>
+            <td class="btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td>
+          </tr>
+          <%
           }
         }
         %>
-      </ul>
+        </tbody>
     </div>
   </div>
   <%- include('../partials/footer.ejs')%>

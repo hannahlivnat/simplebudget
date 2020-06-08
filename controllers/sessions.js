@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
+const expressflash = require('express-flash');
 
 
 //CONNECT USER DATABASE ===============
@@ -18,7 +19,9 @@ const BudgetDetail = require('../models/budgetdetail');
 
 //CONFIGURE PASSPORT ===================
 
-passport.use(new LocalStrategy(
+passport.use(new LocalStrategy({
+    passReqtoCallback: true
+  },
   (username, password, done) => {
     User.findOne({
       username: username
@@ -27,14 +30,10 @@ passport.use(new LocalStrategy(
         return done(err)
       }
       if (!user) {
-        return done(null, false, {
-          message: 'Incorrect Password or Username'
-        })
+        return done(null, false)
       }
       if (!bcrypt.compareSync(password, user.password)) {
-        return done(null, false, {
-          message: 'Incorrect Password or Username'
-        })
+        return done(null, false)
       }
       //this should set 'req.user' to the user object after authentication
       return done(null, user);
@@ -70,7 +69,8 @@ router.get('/login', (req, res) => {
 
 //ESTABLISH LOGIN SESSION IF SUCCESSFUL ---- CREATE ROUTE
 router.post('/sessions', passport.authenticate('local', {
-    failureRedirect: '/login'
+    failureRedirect: '/login',
+    failureFlash: true,
   }),
   (req, res) => {
     req.session.user = req.user;

@@ -1,15 +1,37 @@
-.show-container {
-  display: grid;
-  grid-template-rows: 100px auto 1fr;
-  grid-template-columns: 100%;
-  grid-template-areas:
-    "."
-    "card"
-    ".";
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Serif&family=Poppins:wght@700");
+body {
+  background-color: whitesmoke;
 }
 
-.card {
-  grid-area: card;
+table th {
+  text-align: center;
+}
+
+.nav-wrapper {
+  width: 98%;
+  margin: auto;
+}
+
+.nav-wrapper .brand-logo {
+  font-family: "Poppins", sans-serif;
+}
+
+.nav-wrapper li {
+  font-family: "PT Sans", sans-serif;
+}
+
+.nav-wrapper .desktop-nav-ul li {
+  margin: 0 1vw;
+}
+
+.sidenav li {
+  margin: 1vh auto;
+  text-align: center;
+}
+
+.sidenav input {
+  display: block;
+  margin: 1vh auto;
 }
 
 .redColor {
@@ -19,3 +41,20 @@
 .greenColor {
   color: green;
 }
+
+.show-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 100px auto 1fr;
+      grid-template-rows: 100px auto 1fr;
+  -ms-grid-columns: 100%;
+      grid-template-columns: 100%;
+      grid-template-areas: "." "card" ".";
+}
+
+.card {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: card;
+}
+/*# sourceMappingURL=app.css.map */

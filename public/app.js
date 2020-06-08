@@ -1,9 +1,14 @@
 $(() => {
-  //get dates for the datepicker input
+
+  //BUDGET DETAILS INDEX ================
+  $('.brand-logo').on('click', () => {
+    window.location.replace('/budgetdetails');
+  })
+
+  $('.sidenav').sidenav();
 
 
-
-
+  //FORMS ===============
   $('select').formSelect();
 
   // https://github.com/Dogfalo/materialize/issues/1861 <-- fixes bug that causes select to not display require message
@@ -36,6 +41,7 @@ $(() => {
     showMonthAfterYear: true
   });
 
+  //BUDGET DETAILS SHOW PAGE  ==========================
   //tabs
   $('ul.tabs').tabs({
     swipeable: true
