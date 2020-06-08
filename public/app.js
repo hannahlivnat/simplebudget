@@ -28,8 +28,6 @@ $(() => {
   const currentYear = new Date().getFullYear()
 
   const lastDay = daysinMonth(currentMonth, currentYear);
-  console.log(lastDay);
-
 
   $(".datepicker").datepicker({
     minDate: new Date(currentYear, currentMonth, 1),

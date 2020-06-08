@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
       res.send(err.message)
     } else {
       //push into req.session
-      (req.session.currentbudgetplan).push(createdPlan);
+      (req.session.user.budgetplan).push(createdPlan);
       req.session.user.budgetplan.push(createdPlan);
 
       User.findByIdAndUpdate(req.session.userId, {

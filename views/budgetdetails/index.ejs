@@ -58,7 +58,7 @@
   const expectedFlexExpenses = budgetplan[0].expectedflexexpenses;
   const totalExpectedExpense = parseInt(expectedFirmExpenses) + parseInt(expectedFlexExpenses);
   
-  const actualTotalColorClass = colorCode(expectedIncome, totalIncome);
+  const actualTotalColorClass = colorCode(totalExpectedExpense, totalExpense);
 
   const actualFirmExpenseColorClass = colorCode(expectedFirmExpenses, firmExpenseTotal);
 
@@ -82,7 +82,7 @@
       <span>
         <div class="col s6 center">
           <h2>TOTAL SPENT</h2>
-          <h3 class="center">
+          <h3 class="center <%=actualTotalColorClass%>">
             $<%=totalExpense%></h3>
         </div>
       </span>
@@ -100,7 +100,7 @@
           <tr>
             <td>Income</td>
             <td>$<%=expectedIncome%></td>
-            <td class="<%=actualTotalColorClass%>">$<%= totalIncome %></td>
+            <td>$<%= totalIncome %></td>
           </tr>
           <tr>
             <td>Firm Expense</td>
@@ -112,7 +112,7 @@
           <tr>
             <td>Flex Expenses</td>
             <td>$<%=expectedFlexExpenses%></td>
-            <td class="actualFlexExpenseColorClass">
+            <td class="<%=actualFlexExpenseColorClass%>">
               $<%=flexExpenseTotal%>
             </td>
           </tr>
