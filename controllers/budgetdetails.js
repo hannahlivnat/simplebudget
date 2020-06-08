@@ -151,7 +151,9 @@ router.delete('/:id', (req, res) => {
     } else {
       let budgetArray = req.session.user.budgetdetails
       console.log(budgetArray);
-      let removeThisObject = budgetArray.indexOf(budgetItem._id)
+      let removeThisObject = budgetArray.findIndex(x => x._id === req.params.id)
+      console.log(removeThisObject);
+
       budgetArray.splice(removeThisObject, 1);
       User.findByIdAndUpdate(req.session.userId, {
         $pull: {
