@@ -40,7 +40,7 @@
     padding-bottom: 1.5vh;
     text-transform: uppercase;
     text-align: left;
-    color: $peru-orange;
+    color: $bright-dark-blue;
   }
 
   .row {
@@ -152,6 +152,10 @@
       border-radius: $form-border-radius;
       border-top: 4px solid $peru-orange;
       color: $chalkboard-black;
+
+      .card-title {
+        @include secondary-header-font;
+      }
 
       &:hover {
         box-shadow: $focus-box-shadow;

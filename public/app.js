@@ -47,6 +47,15 @@ $(() => {
     swipeable: true
   });
 
+  // TAB Color
+  $(".tabs").css("background-color", 'hsl(210, 56, 93)');
+
+  // TAB Indicator/Underline Color
+  $(".tabs>.indicator").css("background-color", 'hsl(211,82, 40)');
+
+  // TAB Text Color
+  $(".tabs>li>a").css("color", '#393a3d');
+
   //make delete icon into the submit button of delete form: 
   $('.delete-icon').on('click', () => {
     $('#delete-button').trigger('click');

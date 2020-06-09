@@ -16,3 +16,6 @@
 ## req.session
 * https://thecodebarbarian.com/how-find-works-in-mongoose
 
+## making a table with css
+* https://css-tricks.com/making-charts-with-css/
+

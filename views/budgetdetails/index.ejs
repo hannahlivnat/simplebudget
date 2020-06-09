@@ -64,28 +64,37 @@
   %>
   <div class="content">
     <%- include('../partials/nav.ejs')%>
+    <header class="index-header">
+      <h2 class="center">Hello, <%= currentUser.firstname %>!
+      </h2>
+    </header>
     <div class="container">
-      <h2 class="center">Hello, <%= currentUser.firstname %>! Here's Your Budget Overview for <%=currentMonth%>:</h2>
-      <div class="row">
-        <span>
-          <div class="col s6 center">
-            <h2>TOTAL EARNED</h2>
-            <h3 class="center">
-              $<%=totalIncome%>
-            </h3>
+      <div class="card-container">
+        <div class="card">
+          <div class="card-content">
+            <h4> <%=currentMonth%> Income and Expenses</h4>
           </div>
-        </span>
-        <span>
-          <div class="col s6 center">
-            <h2>TOTAL SPENT</h2>
-            <h3 class="center <%=actualTotalColorClass%>">
-              $<%=totalExpense%></h3>
+          <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+              <li class="tab white"><a href="#income">TOTAL EARNED</a></li>
+              <li class="tab white"><a href="#expense" class="active">TOTAL SPENT</a></li>
+            </ul>
           </div>
-        </span>
+          <div class="card-content">
+            <div class="center" id="income">
+              <h3 class="center">
+                $<%=totalIncome%>
+              </h3>
+            </div>
+            <div class="center" id="expense">
+              <h3 class="center">
+                $<%=totalExpense%></h3>
+            </div>
+          </div>
+        </div>
       </div>
-      <hr>
       <div class="row">
-        <table class="col s12 striped centered responsive-table">
+        <table class="col s12 highlight centered">
           <thead>
             <tr>
               <th>Budget Category</th>
@@ -115,99 +124,9 @@
           </tbody>
         </table>
       </div>
-      <hr>
-      <div class="row">
-        <table class="collapsible centered responsive-table highlight ">
-          <h4>Income</h4>
 
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Amount</th>
-              <th>Description</th>
-              <!-- <th>View | Edit | Delete</th> -->
-            </tr>
-          <tbody>
-            <%
-        for (budgetItem of budgetdetails) {
-          <!-- budgetItem.date = formatDate(budgetItem.date); -->
-          if(budgetItem.category === 'income') {
-            let newDate = new Date(budgetItem.date);
-            newDate = newDate.toDateString();
-            
-        %>
-            <tr>
-              <td class="col s2"><%= newDate %></td>
-              <td class="col s2">$<%= budgetItem.amount %></td>
-              <td class="col s5"><%= budgetItem.description %></td>
-              <!-- <td class="col s3 btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td> -->
-            </tr>
-            <%
-          }
-        }
-        %>
-          </tbody>
-      </div>
-      <div class="row">
-        <table class="collapsible centered responsive-table highlight ">
-          <h4>Flex Expenses</h4>
-
-          <tr>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Description</th>
-            <!-- <th>View | Edit | Delete</th> -->
-          </tr>
-          <tbody>
-            <%
-        for (budgetItem of budgetdetails) {
-          <!-- budgetItem.date = formatDate(budgetItem.date); -->
-          if(budgetItem.category === 'flex-expense') {
-            let newDate = new Date(budgetItem.date);
-            newDate = newDate.toDateString();
-        %>
-            <tr>
-              <td><%= newDate %></td>
-              <td>$<%= budgetItem.amount %></td>
-              <td><%= budgetItem.description %></td>
-              <!-- <td class="btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td> -->
-            </tr>
-            <%
-          }
-        }
-        %>
-          </tbody>
-      </div class="row">
-      <div>
-        <table class="collapsible centered responsive-table highlight ">
-          <h4>Firm Expenses</h4>
-          <tr>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Description</th>
-            <!-- <th>View | Edit | Delete</th> -->
-          </tr>
-          <tbody>
-            <%
-        for (budgetItem of budgetdetails) {
-          <!-- budgetItem.date = formatDate(budgetItem.date); -->
-          if(budgetItem.category === 'firm-expense') {
-            let newDate = new Date(budgetItem.date);
-            newDate = newDate.toDateString();
-        %>
-            <tr>
-              <td><%= newDate %></td>
-              <td>$<%= budgetItem.amount %></td>
-              <td><%= budgetItem.description %></td>
-              <!-- <td class="btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td> -->
-            </tr>
-            <%
-          }
-        }
-        %>
-          </tbody>
-      </div>
     </div>
+  </div>
   </div>
   <%- include('../partials/footer.ejs')%>
 </body>

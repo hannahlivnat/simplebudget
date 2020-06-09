@@ -117,7 +117,7 @@ nav {
   padding-bottom: 1.5vh;
   text-transform: uppercase;
   text-align: left;
-  color: #BA6912;
+  color: #1263ba;
 }
 
 @media only screen and (min-width: 1300px) {
@@ -307,33 +307,33 @@ nav {
   }
 }
 
+.about-section .card-container .card .card-title {
+  font-size: 2rem;
+  font-family: "PT Sans", sans-serif;
+  letter-spacing: 0.02vw;
+}
+
+@media only screen and (min-width: 1300px) {
+  .about-section .card-container .card .card-title {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .about-section .card-container .card .card-title {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .about-section .card-container .card .card-title {
+    font-size: 2rem;
+  }
+}
+
 .about-section .card-container .card:hover {
   -webkit-box-shadow: 0px 0.2em 2.5em #c4c4c4;
           box-shadow: 0px 0.2em 2.5em #c4c4c4;
-}
-
-.show-container {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: 100px auto 1fr;
-      grid-template-rows: 100px auto 1fr;
-  -ms-grid-columns: 100%;
-      grid-template-columns: 100%;
-      grid-template-areas: "." "card" ".";
-}
-
-.card {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
-  grid-area: card;
-}
-
-.delete-icon:hover {
-  cursor: pointer;
-}
-
-.delete-button {
-  display: none;
 }
 
 footer {
@@ -354,6 +354,82 @@ footer a:hover {
   text-decoration: none;
   cursor: pointer;
   color: #265d7e;
+}
+
+.delete-icon:hover {
+  cursor: pointer;
+}
+
+.delete-button {
+  display: none;
+}
+
+.index-header {
+  background-color: #1263ba;
+  width: 100%;
+  padding: 5vh 0 10vh 0;
+}
+
+.index-header h2 {
+  font-size: 2rem;
+  font-family: "PT Sans", sans-serif;
+  letter-spacing: 0.02vw;
+  width: 85%;
+  margin: 0 auto;
+  color: white;
+  line-height: 2.5rem;
+}
+
+@media only screen and (min-width: 1300px) {
+  .index-header h2 {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .index-header h2 {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .index-header h2 {
+    font-size: 2rem;
+  }
+}
+
+.card-container {
+  margin: -5vh auto 10vh auto;
+  border-radius: 10px;
+}
+
+.card-content {
+  max-height: 200px;
+}
+
+.card-content h4 {
+  font-size: 2rem;
+  font-family: "PT Sans", sans-serif;
+  letter-spacing: 0.02vw;
+  color: #1263ba;
+}
+
+@media only screen and (min-width: 1300px) {
+  .card-content h4 {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .card-content h4 {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .card-content h4 {
+    font-size: 2rem;
+  }
 }
 
 html {

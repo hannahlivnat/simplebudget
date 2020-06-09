@@ -1,0 +1,28 @@
+//Header for Index Page
+.index-header {
+  background-color: $bright-dark-blue;
+  width: 100%;
+  padding: 5vh 0 10vh 0;
+
+  h2 {
+    @include secondary-header-font;
+    width: 85%;
+    margin: $margin0auto;
+    color: $white;
+    line-height: 2.5rem;
+  }
+}
+
+.card-container {
+  margin: -5vh auto 10vh auto;
+  border-radius: $form-border-radius;
+}
+
+.card-content {
+  max-height: 200px;
+
+  h4 {
+    @include secondary-header-font;
+    color: $bright-dark-blue;
+  }
+}

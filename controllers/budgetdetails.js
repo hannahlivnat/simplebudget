@@ -141,7 +141,7 @@ router.get('/income', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
 
 //FIRM EXPENSE SHOW ROUTE
 router.get('/firmexpense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
-  res.render('budgetdetails/firmexpense.ejs', {
+  res.render('budgetdetails/firm-expense.ejs', {
     pageName: 'Firm Expenses Page',
     budgetdetails: req.session.user.budgetdetails,
     currentUser: req.session.user,
@@ -153,31 +153,13 @@ router.get('/firmexpense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) =
 
 //FLEX EXPENSE SHOW ROUTE
 router.get('/flexexpense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
-  res.render('budgetdetails/flexexpense.ejs', {
+  res.render('budgetdetails/flex-expense.ejs', {
     pageName: 'Flex Expense Page',
     budgetdetails: req.session.user.budgetdetails,
     currentUser: req.session.user,
     budgetplan: req.session.user.budgetplan,
     budgetcategory: 'flex-expense',
     heading: 'Flex Expenses'
-  })
-});
-
-
-router.get('/:id', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
-  BudgetDetail.findById(req.params.id, (err, foundItem) => {
-    if (err) {
-      res.send(err.message)
-    } else {
-      res.render('budgetdetails/show.ejs', {
-        budgetItem: foundItem,
-        pageName: 'Budget Item Details',
-        budgetdetails: req.session.user.budgetdetails,
-        currentUser: req.session.user,
-        budgetplan: req.session.user.budgetplan
-      })
-    }
-
   })
 });
 
