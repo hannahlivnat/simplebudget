@@ -36,6 +36,10 @@ nav {
   }
 }
 
+.nav-wrapper .brand-logo:hover {
+  cursor: pointer;
+}
+
 .nav-wrapper li {
   font-family: "PT Sans", sans-serif;
 }
@@ -474,28 +478,46 @@ footer a:hover {
   width: 100%;
   display: block;
   margin-bottom: 20px;
+  text-align: left;
+  color: #1263ba;
+}
+
+.budget-dl dt h4 {
   font-size: 2rem;
   font-family: "PT Sans", sans-serif;
   letter-spacing: 0.02vw;
-  color: #1263ba;
-  text-align: left;
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 1300px) {
-  .budget-dl dt {
+  .budget-dl dt h4 {
     font-size: 0.7rem;
   }
 }
 
 @media only screen and (min-width: 1000px) {
-  .budget-dl dt {
+  .budget-dl dt h4 {
     font-size: 1rem;
   }
 }
 
 @media only screen and (min-width: 800px) {
-  .budget-dl dt {
+  .budget-dl dt h4 {
     font-size: 2rem;
+  }
+}
+
+.budget-dl dt p {
+  margin-top: 0;
+  font-family: "PT Serif", serif;
+  font-size: 1rem;
+  color: #393a3d;
+  color: #BA6912;
+}
+
+@media only screen and (min-width: 800px) {
+  .budget-dl dt p {
+    font-size: 1rem;
   }
 }
 
@@ -554,6 +576,13 @@ footer a:hover {
 
 .budget-dl .percentage:hover:after, .budget-dl .percentage:focus:after {
   background-color: #aaa;
+}
+
+.budget-dl .percentage-income:after,
+.budget-dl .percentage-firmexpense:after,
+.budget-dl .percentage-flexexpense:after {
+  border: 2px solid #265d7e;
+  background-color: rgba(38, 93, 126, 0.6);
 }
 
 .budget-dl .percentage-1:after {

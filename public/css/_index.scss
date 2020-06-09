@@ -49,9 +49,22 @@
     width: 100%;
     display: block;
     margin-bottom: 20px;
-    @include secondary-header-font;
-    color: $bright-dark-blue;
     text-align: left;
+    color: $bright-dark-blue;
+
+
+
+    h4 {
+      @include secondary-header-font;
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-top: 0;
+      @include paragraph-font;
+      color: $peru-orange;
+    }
+
   }
 
   .text,
@@ -96,6 +109,15 @@
       &:after {
         background-color: #aaa;
       }
+    }
+  }
+
+  .percentage-income,
+  .percentage-firmexpense,
+  .percentage-flexexpense {
+    &:after {
+      border: 2px solid $darker-blue;
+      background-color: transparentize($color: $darker-blue, $amount: .4);
     }
   }
 

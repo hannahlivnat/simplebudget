@@ -35,28 +35,22 @@ const flexpercentage = Math.round(100 / (expectedFlexExpenses / flexExpenseTotal
 
 
 <dl class='budget-dl'>
-  <dt>Check This Month's Progress</dt>
-  <dd class="percentage percentage-100 expected-color"><span class="text">Expected Income: $<%= expectedIncome %></span>
+  <dt>
+    <h4>Check This Month's Progress:</h4> <br />
+    <p>Click on a 'current' bar graph to view all budget items in that category</p>
+  </dt>
+  <dd class="percentage percentage-100"><span class="text">Expected Income: $<%= expectedIncome %></span>
   </dd>
-  <dd class="percentage percentage-<%=incomepercentage%> actual-color"><span class="text">Current Income:
+  <dd class="percentage percentage-<%=incomepercentage%> percentage-income"><span class="text">Current Income:
       $<%=totalIncome %></span></dd>
-  <dd class="percentage percentage-100 expected-color"><span class="text">Expected Firm Expenses:
+  <dd class="percentage percentage-100"><span class="text">Expected Firm Expenses:
       $<%=expectedFirmExpenses%></span>
   </dd>
-  <dd class="percentage percentage-<%=firmpercentage%> actual-color"><span class="text">Current Firm Expenses:
+  <dd class="percentage percentage-<%=firmpercentage%> percentage-firmexpense"><span class="text">Current Firm Expenses:
       $<%=firmExpenseTotal%></span></dd>
-  <dd class="percentage percentage-100 expected-color"><span class="text">Expected Flex Expenses:
+  <dd class="percentage percentage-100"><span class="text">Expected Flex Expenses:
       $<%=expectedFlexExpenses%></span>
   </dd>
-  <dd class="percentage percentage-<%=flexpercentage%> actual-color"><span class="text">Current Flex Expenses:
+  <dd class="percentage percentage-<%=flexpercentage%> percentage-flexexpense"><span class="text">Current Flex Expenses:
       $<%=flexExpenseTotal%></span></dd>
 </dl>
-
-<ul class="collection with-header">
-  <li class="collection-header">
-    <h4>View Your Expenses / Income In Detail: </h4>
-  </li>
-  <li class="collection-item"><a href="/budgetdetails/income">Income</a></li>
-  <li class="collection-item"><a href="/budgetdetails/firm-expense">Firm Expense</a></li>
-  <li class="collection-item"><a href="/budgetdetails/flex-expense">Flex Expense</a></li>
-</ul>

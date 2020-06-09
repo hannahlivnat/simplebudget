@@ -1,13 +1,24 @@
 $(() => {
 
+  //RESPONSIVE SIDE NAV =================
+
+  $('.sidenav').sidenav();
+
   //BUDGET DETAILS INDEX ================
   $('.brand-logo').on('click', () => {
     window.location.replace('/budgetdetails');
   })
-
-  $('.sidenav').sidenav();
-
-
+  //when you click on the bar graphs, they'll take you to 
+  //the corresponding who page
+  $('.percentage-income').on('click', () => {
+    window.location.replace('/budgetdetails/income');
+  })
+  $('.percentage-firmexpense').on('click', () => {
+    window.location.replace('/budgetdetails/firm-expense');
+  })
+  $('.percentage-flexexpense').on('click', () => {
+    window.location.replace('/budgetdetails/flex-expense');
+  })
   //FORMS ===============
   $('select').formSelect();
 
