@@ -78,7 +78,6 @@ router.post('/', (req, res) => {
 });
 
 //EDIT
-
 router.get('/:id/edit', isAuthenticated, (req, res) => {
   BudgetPlan.findById(req.params.id, (err, foundPlan) => {
     res.render('budgetplans/edit.ejs', {

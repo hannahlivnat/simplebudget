@@ -125,7 +125,45 @@ router.put('/:id', (req, res) => {
 
 });
 
-//SHOW - works
+//SHOW ROUTES
+
+//INCOME SHOW ROUTE
+router.get('/income', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
+  res.render('budgetdetails/income.ejs', {
+    pageName: 'Income Page',
+    budgetdetails: req.session.user.budgetdetails,
+    currentUser: req.session.user,
+    budgetplan: req.session.user.budgetplan,
+    budgetcategory: 'income',
+    heading: 'Income'
+  })
+});
+
+//FIRM EXPENSE SHOW ROUTE
+router.get('/firmexpense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
+  res.render('budgetdetails/firmexpense.ejs', {
+    pageName: 'Firm Expenses Page',
+    budgetdetails: req.session.user.budgetdetails,
+    currentUser: req.session.user,
+    budgetplan: req.session.user.budgetplan,
+    budgetcategory: 'firm-expense',
+    heading: 'Firm Expenses'
+  })
+});
+
+//FLEX EXPENSE SHOW ROUTE
+router.get('/flexexpense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
+  res.render('budgetdetails/flexexpense.ejs', {
+    pageName: 'Flex Expense Page',
+    budgetdetails: req.session.user.budgetdetails,
+    currentUser: req.session.user,
+    budgetplan: req.session.user.budgetplan,
+    budgetcategory: 'flex-expense',
+    heading: 'Flex Expenses'
+  })
+});
+
+
 router.get('/:id', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
   BudgetDetail.findById(req.params.id, (err, foundItem) => {
     if (err) {
@@ -153,6 +191,9 @@ router.delete('/:id', (req, res) => {
       console.log(budgetArray);
       let removeThisObject = budgetArray.findIndex(x => x._id === req.params.id)
       console.log(removeThisObject);
+      let category = budgetArray[removeThisObject].category;
+      console.log(category);
+
 
       budgetArray.splice(removeThisObject, 1);
       User.findByIdAndUpdate(req.session.userId, {
@@ -169,7 +210,7 @@ router.delete('/:id', (req, res) => {
           console.log(err.message);
 
         } else {
-          res.redirect('/budgetdetails')
+          res.redirect(`/budgetdetails/${category}`)
         }
       })
     }

@@ -57,13 +57,9 @@
   const expectedFirmExpenses = budgetplan[0].expectedfirmexpenses;
   const expectedFlexExpenses = budgetplan[0].expectedflexexpenses;
   const totalExpectedExpense = parseInt(expectedFirmExpenses) + parseInt(expectedFlexExpenses);
-  
   const actualTotalColorClass = colorCode(totalExpectedExpense, totalExpense);
-
   const actualFirmExpenseColorClass = colorCode(expectedFirmExpenses, firmExpenseTotal);
-
   const actualFlexExpenseColorClass = colorCode(expectedFlexExpenses, flexExpenseTotal);
-
   const currentMonth = getCurrentMonth();
   %>
   <div class="content">
@@ -98,19 +94,19 @@
             </tr>
           <tbody>
             <tr>
-              <td>Income</td>
+              <td><a href="/budgetdetails/income">Income</a></td>
               <td>$<%=expectedIncome%></td>
               <td>$<%= totalIncome %></td>
             </tr>
             <tr>
-              <td>Firm Expense</td>
+              <td><a href="/budgetdetails/firm-expense">Firm Expense</a></td>
               <td>$<%=expectedFirmExpenses%></td>
               <td class="<%=actualFirmExpenseColorClass%>">
                 $<%=firmExpenseTotal%>
               </td>
             </tr>
             <tr>
-              <td>Flex Expenses</td>
+              <td><a href="/budgetdetails/flex-expense">Flex Expense</a></td>
               <td>$<%=expectedFlexExpenses%></td>
               <td class="<%=actualFlexExpenseColorClass%>">
                 $<%=flexExpenseTotal%>
@@ -129,7 +125,7 @@
               <th>Date</th>
               <th>Amount</th>
               <th>Description</th>
-              <th>View | Edit | Delete</th>
+              <!-- <th>View | Edit | Delete</th> -->
             </tr>
           <tbody>
             <%
@@ -144,7 +140,7 @@
               <td class="col s2"><%= newDate %></td>
               <td class="col s2">$<%= budgetItem.amount %></td>
               <td class="col s5"><%= budgetItem.description %></td>
-              <td class="col s3 btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td>
+              <!-- <td class="col s3 btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td> -->
             </tr>
             <%
           }
@@ -160,7 +156,7 @@
             <th>Date</th>
             <th>Amount</th>
             <th>Description</th>
-            <th>View | Edit | Delete</th>
+            <!-- <th>View | Edit | Delete</th> -->
           </tr>
           <tbody>
             <%
@@ -174,7 +170,7 @@
               <td><%= newDate %></td>
               <td>$<%= budgetItem.amount %></td>
               <td><%= budgetItem.description %></td>
-              <td class="btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td>
+              <!-- <td class="btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td> -->
             </tr>
             <%
           }
@@ -189,7 +185,7 @@
             <th>Date</th>
             <th>Amount</th>
             <th>Description</th>
-            <th>View | Edit | Delete</th>
+            <!-- <th>View | Edit | Delete</th> -->
           </tr>
           <tbody>
             <%
@@ -203,7 +199,7 @@
               <td><%= newDate %></td>
               <td>$<%= budgetItem.amount %></td>
               <td><%= budgetItem.description %></td>
-              <td class="btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td>
+              <!-- <td class="btn" href="/budgetdetails/<%= budgetItem._id %>">See More Details</td> -->
             </tr>
             <%
           }

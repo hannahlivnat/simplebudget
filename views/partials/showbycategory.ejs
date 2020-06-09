@@ -1,0 +1,32 @@
+<div class="row">
+  <h4><%=heading%></h4>
+  <p>Click on the name to edit, click on the trash can to delete</p>
+  <ul class="collection col s10 center">
+    <% 
+        for (budgetItem of budgetdetails) {
+          if(budgetItem.category === budgetcategory) {
+    let newDate = new Date(budgetItem.date)
+    newDate = newDate.toDateString();
+    %>
+
+    <li class="collection-item">
+      <div class="right-hand-side ">
+        <p><a href="/budgetdetails/<%=budgetItem._id%>/edit"></a><%=budgetItem.description%></a></p>
+        <p><%=newDate %></p>
+        <p>$<%=budgetItem.amount%></p>
+
+      </div>
+      <div class="left-hand-side">
+        <form class="delete-form" action="/budgetdetails/<%=budgetItem._id%>?_method=DELETE" method="POST">
+          <span class="material-icons delete-icon"> delete_outline</span>
+          <input type="submit" class="delete-button" id="delete-button" value="">
+        </form>
+      </div>
+    </li>
+
+
+
+    <% }
+        }%>
+  </ul>
+</div>

@@ -37,7 +37,7 @@
   }
 
   font-size: $lg-size;
-  font-family: $PT-Sans;
+  font-family: $Poppins;
   letter-spacing: $md-lg-spacing;
   padding: $font-padding-vh;
 
@@ -57,18 +57,11 @@
   }
 
   font-size: $md-size;
-  font-family: $Poppins;
+  font-family: $PT-Sans;
   letter-spacing: $md-lg-spacing;
 }
 
 @mixin paragraph-font {
-  @include bp(xl) {
-    font-size: .1vw;
-  }
-
-  @include bp(lg) {
-    font-size: $xs-size;
-  }
 
   @include bp(md) {
     font-size: $sm-size;
@@ -76,6 +69,7 @@
 
   font-family: $PT-Serif;
   font-size: $sm-size;
+  color: $paragraph-color;
 }
 
 

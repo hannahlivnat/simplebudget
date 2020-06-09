@@ -47,5 +47,10 @@ $(() => {
     swipeable: true
   });
 
+  //make delete icon into the submit button of delete form: 
+  $('.delete-icon').on('click', () => {
+    $('#delete-button').trigger('click');
+  })
+
 
 }); //BEYOND THE WALL
