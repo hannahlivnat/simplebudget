@@ -1,7 +1,9 @@
 <div class="row">
-  <h4><%=heading%></h4>
-  <p>Click on the name to edit, click on the trash can to delete</p>
-  <ul class="collection col s10 center">
+  <ul class="collection with-header budget-detail-collection">
+    <li class="collection-header">
+      <h4><%=heading%></h4>
+      <p>Click on the description to edit or on the trash can to delete your budget item!</p>
+    </li>
     <% 
         for (budgetItem of budgetdetails) {
           if(budgetItem.category === budgetcategory) {
@@ -9,9 +11,10 @@
     newDate = newDate.toDateString();
     %>
 
-    <li class="collection-item">
+    <li class="collection-item budget-detail-collection-item">
       <div class="right-hand-side ">
-        <p><a href="/budgetdetails/<%=budgetItem._id%>/edit"></a><%=budgetItem.description%></a></p>
+        <p class="collection-item-description"><a
+            href="/budgetdetails/<%=budgetItem._id%>/edit"><%=budgetItem.description%></a></p>
         <p><%=newDate %></p>
         <p>$<%=budgetItem.amount%></p>
 

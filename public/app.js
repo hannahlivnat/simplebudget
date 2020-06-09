@@ -82,8 +82,8 @@ $(() => {
   $(".tabs>li>a").css("color", '#393a3d');
 
   //make delete icon into the submit button of delete form: 
-  $('.delete-icon').on('click', () => {
-    $('#delete-button').trigger('click');
+  $('.delete-icon').on('click', (e) => {
+    $(event.target).next().trigger('click');
   })
 
 

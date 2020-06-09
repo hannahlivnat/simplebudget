@@ -10,3 +10,55 @@
 .delete-button {
   display: none;
 }
+
+//layout of show page
+.budget-detail-collection {
+  padding: 0;
+  margin: 0;
+
+  .collection-header {
+
+    h4 {
+      @include large-header-font;
+      color: $peru-orange;
+      text-align: center;
+    }
+
+    p {
+      @include paragraph-font;
+      text-align: center;
+    }
+
+  }
+}
+
+.budget-detail-collection-item {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 1fr 100px;
+  grid-template-areas: "right left";
+
+  .right-hand-side {
+    grid-area: right;
+
+    .collection-item-description {
+      a {
+        @include secondary-header-font;
+        font-size: $sm-size;
+        text-transform: uppercase;
+        color: $bright-dark-blue;
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: $peru-orange;
+        }
+
+      }
+    }
+  }
+
+  .left-hand-side {
+    grid-area: left;
+  }
+}

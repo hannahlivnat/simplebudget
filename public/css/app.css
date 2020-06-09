@@ -371,6 +371,92 @@ footer a:hover {
   display: none;
 }
 
+.budget-detail-collection {
+  padding: 0;
+  margin: 0;
+}
+
+.budget-detail-collection .collection-header h4 {
+  font-size: 3rem;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.02vw;
+  padding: 1vh 0 3vh 0;
+  color: #BA6912;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1000px) {
+  .budget-detail-collection .collection-header h4 {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .budget-detail-collection .collection-header h4 {
+    font-size: 3rem;
+  }
+}
+
+.budget-detail-collection .collection-header p {
+  font-family: "PT Serif", serif;
+  font-size: 1rem;
+  color: #393a3d;
+  text-align: center;
+}
+
+.budget-detail-collection-item {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 100%;
+      grid-template-rows: 100%;
+  -ms-grid-columns: 1fr 100px;
+      grid-template-columns: 1fr 100px;
+      grid-template-areas: "right left";
+}
+
+.budget-detail-collection-item .right-hand-side {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: right;
+}
+
+.budget-detail-collection-item .right-hand-side .collection-item-description a {
+  font-size: 2rem;
+  font-family: "PT Sans", sans-serif;
+  letter-spacing: 0.02vw;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #1263ba;
+}
+
+@media only screen and (min-width: 1300px) {
+  .budget-detail-collection-item .right-hand-side .collection-item-description a {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .budget-detail-collection-item .right-hand-side .collection-item-description a {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .budget-detail-collection-item .right-hand-side .collection-item-description a {
+    font-size: 2rem;
+  }
+}
+
+.budget-detail-collection-item .right-hand-side .collection-item-description a:hover, .budget-detail-collection-item .right-hand-side .collection-item-description a:focus, .budget-detail-collection-item .right-hand-side .collection-item-description a:active {
+  color: #BA6912;
+}
+
+.budget-detail-collection-item .left-hand-side {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: left;
+}
+
 .index-header {
   background-color: #1263ba;
   width: 100%;
