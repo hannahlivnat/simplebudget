@@ -363,6 +363,10 @@ footer a:hover {
   color: #265d7e;
 }
 
+.delete-icon {
+  font-size: 2.2rem;
+}
+
 .delete-icon:hover {
   cursor: pointer;
 }
@@ -451,10 +455,22 @@ footer a:hover {
   color: #BA6912;
 }
 
+.budget-detail-collection-item .right-hand-side .collection-item-details {
+  font-family: "PT Serif", serif;
+  font-size: 1rem;
+  color: #393a3d;
+}
+
 .budget-detail-collection-item .left-hand-side {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .index-header {

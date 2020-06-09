@@ -2,6 +2,8 @@
 
 //styling for delete form
 .delete-icon {
+  font-size: 2.2rem;
+
   &:hover {
     cursor: pointer;
   }
@@ -56,9 +58,15 @@
 
       }
     }
+
+    .collection-item-details {
+      @include paragraph-font;
+    }
   }
 
   .left-hand-side {
     grid-area: left;
+    display: flex;
+    align-items: center;
   }
 }
