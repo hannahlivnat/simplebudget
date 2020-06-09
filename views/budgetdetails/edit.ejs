@@ -5,12 +5,15 @@
 <body>
   <div class="content">
     <%- include('../partials/nav.ejs')%>
-
+    <header class="index-header">
+      <h2 class="center new-detail-header">Edit Your Income and Expenses for the Month
+      </h2>
+    </header>
     <div class="container">
-      <h1>Edit to Your Income / Expenses</h1>
       <div class="row">
-        <form class="col s12" action="/budgetdetails/<%=budgetItem.id%>?_method=PUT" method="POST">
+        <form class="box-form col s12" action="/budgetdetails/<%=budgetItem.id%>?_method=PUT" method="POST">
           <div class="row">
+            <h4>Edit to Your Income / Expenses</h4>
             <div class="input-field col s6">
               <input type="text" name="date" class="datepicker" value="<%=budgetItem.date%>" required />
               <label for="date">Date</label>
@@ -40,7 +43,7 @@
             </div>
           </div>
           <div class="row">
-            <input class="btn col s4" type="submit" value="Add New Income/Expense">
+            <input class="btn-small" type="submit" value="Add New Income/Expense">
           </div>
         </form>
       </div>

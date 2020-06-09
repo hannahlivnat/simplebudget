@@ -1,4 +1,15 @@
-//Form Container for login - style translates to all other forms
+//separate focus-within style for all forms but budget details
+// messes up date-picker feature
+.add-focus-to-form {
+
+  &:focus-within {
+    box-shadow: $focus-box-shadow;
+    transform: scale(1.025);
+  }
+}
+
+//Form Container for all other forms on site 
+// class name: .box-form
 .box-form {
   @include bp(xl) {
     margin-top: -15vh;
@@ -10,11 +21,6 @@
   box-shadow: $box-shadow;
   background-color: $white;
   color: $chalkboard-black;
-
-  &:focus-within {
-    box-shadow: $focus-box-shadow;
-    transform: scale(1.025);
-  }
 
   h4 {
     @include secondary-header-font;
@@ -96,10 +102,4 @@
   @include bp(xl) {
     visibility: hidden;
   }
-}
-
-//fixing weird outline on datepicker select - new budget detail
-.modal-overlay {
-  outline: none;
-  opacity: 1;
 }
