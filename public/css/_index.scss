@@ -28,6 +28,62 @@
   }
 }
 
+//Index Page Responsiveness - Replace budget chart with table at > 620 px
+
+.desktop-and-tablet-content {
+  @include bp(budgetbp) {
+    display: none;
+  }
+}
+
+.mobile-budget-content {
+  @include bp(budgetbp) {
+    display: block;
+
+    .view-chart-button {
+      display: none;
+    }
+  }
+
+  background-color: $white;
+  box-shadow: $box-shadow;
+  padding: 3vh 0 2vh 0;
+  display: none;
+
+  h4 {
+    @include secondary-header-font;
+    color: $bright-dark-blue;
+    margin-left: 2rem;
+  }
+
+  p {
+    @include paragraph-font;
+    margin-left: 2rem;
+  }
+
+  a {
+    font-size: $sm-size;
+    color: $bright-dark-blue;
+
+    &:hover {
+      color: $peru-orange;
+    }
+  }
+
+  table {
+    margin-bottom: 3vh;
+  }
+
+  .view-chart-button {
+    background-color: $bright-dark-blue;
+    display: block;
+    margin: 3vh auto 1vh auto;
+  }
+
+}
+
+
+
 //chart - Budget Check In
 // https://css-tricks.com/making-charts-with-css/
 
@@ -42,7 +98,7 @@
   position: relative;
   padding: 40px 20px;
   box-sizing: border-box;
-
+  overflow: hidden;
 
   dt {
     align-self: flex-start;
@@ -69,11 +125,14 @@
 
   .text,
   a {
+    @include bp(xs) {
+      font-size: .4rem;
+    }
+
     @include paragraph-font;
-    color: $chalkboard-black;
+    font-size: $xs-size;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     height: 40px;
     width: 130px;
     position: absolute;
@@ -92,7 +151,7 @@
     &:after {
       content: "";
       display: block;
-      width: 2px;
+      width: 1px;
       margin-bottom: 10px;
       height: 90%;
       position: relative;
@@ -134,6 +193,12 @@
       }
 
     }
+  }
+
+  .view-table-button {
+    background-color: $bright-dark-blue;
+    display: block;
+    margin: 3vh auto 1vh auto;
   }
 }
 

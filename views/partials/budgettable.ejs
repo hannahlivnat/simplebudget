@@ -33,24 +33,65 @@ const firmpercentage = Math.round(100 / (expectedFirmExpenses / firmExpenseTotal
 const flexpercentage = Math.round(100 / (expectedFlexExpenses / flexExpenseTotal));
 %>
 
+<div class="desktop-and-tablet-content">
+  <dl class='budget-dl'>
+    <dt>
+      <h4>Check This Month's Progress:</h4> <br />
+      <p>Click on a 'current' bar graph to view all budget items in that category</p>
+    </dt>
+    <dd class="percentage percentage-100"><span class="text">Expected <br />Income: $<%= expectedIncome %></span>
+    </dd>
+    <dd class="percentage percentage-<%=incomepercentage%> percentage-income"><span class="text">Current <br />Income:
+        $<%=totalIncome %></span></dd>
+    <dd class="percentage percentage-100"><span class="text">Expected <br />Firm Expenses:
+        $<%=expectedFirmExpenses%></span>
+    </dd>
+    <dd class="percentage percentage-<%=firmpercentage%> percentage-firmexpense"><span class="text">Current <br />Firm
+        Expenses:
+        $<%=firmExpenseTotal%></span></dd>
+    <dd class="percentage percentage-100"><span class="text">Expected <br />Flex Expenses:
+        $<%=expectedFlexExpenses%></span>
+    </dd>
+    <dd class="percentage percentage-<%=flexpercentage%> percentage-flexexpense"><span class="text">Current <br />Flex
+        Expenses:
+        $<%=flexExpenseTotal%></span></dd>
+    <dd class="col s12"><button class="centered view-table-button btn-small">View Table Instead</button></dd>
+  </dl>
 
-<dl class='budget-dl'>
-  <dt>
-    <h4>Check This Month's Progress:</h4> <br />
-    <p>Click on a 'current' bar graph to view all budget items in that category</p>
-  </dt>
-  <dd class="percentage percentage-100"><span class="text">Expected Income: $<%= expectedIncome %></span>
-  </dd>
-  <dd class="percentage percentage-<%=incomepercentage%> percentage-income"><span class="text">Current Income:
-      $<%=totalIncome %></span></dd>
-  <dd class="percentage percentage-100"><span class="text">Expected Firm Expenses:
-      $<%=expectedFirmExpenses%></span>
-  </dd>
-  <dd class="percentage percentage-<%=firmpercentage%> percentage-firmexpense"><span class="text">Current Firm Expenses:
-      $<%=firmExpenseTotal%></span></dd>
-  <dd class="percentage percentage-100"><span class="text">Expected Flex Expenses:
-      $<%=expectedFlexExpenses%></span>
-  </dd>
-  <dd class="percentage percentage-<%=flexpercentage%> percentage-flexexpense"><span class="text">Current Flex Expenses:
-      $<%=flexExpenseTotal%></span></dd>
-</dl>
+</div>
+<div class="mobile-budget-content">
+  <div class="row">
+    <table class="col s12 highlight centered responsive-table">
+      <h4>Check Your Budget</h4>
+      <p>Click on any category to view in detail.</p>
+      <thead>
+        <tr>
+          <th>Budget Category</th>
+          <th>Total Estimated</th>
+          <th>Current Actual Total</th>
+        </tr>
+      <tbody>
+        <tr>
+          <td><a href="/budgetdetails/income">Income</a></td>
+          <td>$0</td>
+          <td>$<%= totalIncome %></td>
+        </tr>
+        <tr>
+          <td><a href="/budgetdetails/firm-expense">Firm Expense</a></td>
+          <td>$0</td>
+          <td>
+            $<%=firmExpenseTotal%>
+          </td>
+        </tr>
+        <tr>
+          <td><a href="/budgetdetails/flex-expense">Flex Expense</a></td>
+          <td>$0</td>
+          <td>
+            $<%=flexExpenseTotal%>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="centered view-chart-button btn-small">View Chart Instead</button>
+  </div>
+</div>

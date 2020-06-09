@@ -7,6 +7,12 @@
     }
   }
 
+  @else if $point==budgetbp {
+    @media only screen and (max-width: 620px) {
+      @content;
+    }
+  }
+
   @else if $point==md {
     @media only screen and (min-width: 800px) {
       @content;
@@ -62,11 +68,6 @@
 }
 
 @mixin paragraph-font {
-
-  @include bp(md) {
-    font-size: $sm-size;
-  }
-
   font-family: $PT-Serif;
   font-size: $sm-size;
   color: $paragraph-color;

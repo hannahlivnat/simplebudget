@@ -19,6 +19,20 @@ $(() => {
   $('.percentage-flexexpense').on('click', () => {
     window.location.replace('/budgetdetails/flex-expense');
   })
+
+  //click "view table instead" button to make table appear instead of chart
+  $('.view-table-button').on('click', () => {
+    $('.desktop-and-tablet-content').css('display', 'none');
+    $('.mobile-budget-content').css('display', 'block');
+  })
+
+  //click "view chart instead" button to make table appear instead of chart
+  $('.view-chart-button').on('click', () => {
+    $('.desktop-and-tablet-content').css('display', 'block');
+    $('.mobile-budget-content').css('display', 'none');
+  })
+
+
   //FORMS ===============
   $('select').formSelect();
 

@@ -163,12 +163,6 @@ nav {
   margin-top: 3vh;
 }
 
-@media only screen and (min-width: 800px) {
-  .box-form .row p {
-    font-size: 1rem;
-  }
-}
-
 .box-form .row p a {
   color: #2d3543;
   text-decoration: underline;
@@ -282,13 +276,6 @@ nav {
   font-family: "PT Serif", serif;
   font-size: 1rem;
   color: #393a3d;
-}
-
-@media only screen and (min-width: 800px) {
-  .about-section .text-content p,
-  .about-section .text-content li {
-    font-size: 1rem;
-  }
 }
 
 .about-section .card-container {
@@ -452,6 +439,81 @@ footer a:hover {
   }
 }
 
+@media only screen and (max-width: 620px) {
+  .desktop-and-tablet-content {
+    display: none;
+  }
+}
+
+.mobile-budget-content {
+  background-color: white;
+  -webkit-box-shadow: 2px 2px 4px #c4c5c4;
+          box-shadow: 2px 2px 4px #c4c5c4;
+  padding: 3vh 0 2vh 0;
+  display: none;
+}
+
+@media only screen and (max-width: 620px) {
+  .mobile-budget-content {
+    display: block;
+  }
+  .mobile-budget-content .view-chart-button {
+    display: none;
+  }
+}
+
+.mobile-budget-content h4 {
+  font-size: 2rem;
+  font-family: "PT Sans", sans-serif;
+  letter-spacing: 0.02vw;
+  color: #1263ba;
+  margin-left: 2rem;
+}
+
+@media only screen and (min-width: 1300px) {
+  .mobile-budget-content h4 {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .mobile-budget-content h4 {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .mobile-budget-content h4 {
+    font-size: 2rem;
+  }
+}
+
+.mobile-budget-content p {
+  font-family: "PT Serif", serif;
+  font-size: 1rem;
+  color: #393a3d;
+  margin-left: 2rem;
+}
+
+.mobile-budget-content a {
+  font-size: 1rem;
+  color: #1263ba;
+}
+
+.mobile-budget-content a:hover {
+  color: #BA6912;
+}
+
+.mobile-budget-content table {
+  margin-bottom: 3vh;
+}
+
+.mobile-budget-content .view-chart-button {
+  background-color: #1263ba;
+  display: block;
+  margin: 3vh auto 1vh auto;
+}
+
 .budget-dl {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -470,6 +532,7 @@ footer a:hover {
   padding: 40px 20px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  overflow: hidden;
 }
 
 .budget-dl dt {
@@ -515,37 +578,28 @@ footer a:hover {
   color: #BA6912;
 }
 
-@media only screen and (min-width: 800px) {
-  .budget-dl dt p {
-    font-size: 1rem;
-  }
-}
-
 .budget-dl .text,
 .budget-dl a {
   font-family: "PT Serif", serif;
   font-size: 1rem;
   color: #393a3d;
-  color: #2d3543;
+  font-size: 0.7rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
   height: 40px;
   width: 130px;
   position: absolute;
   left: 20px;
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (max-width: 350px) {
   .budget-dl .text,
   .budget-dl a {
-    font-size: 1rem;
+    font-size: .4rem;
   }
 }
 
@@ -561,7 +615,7 @@ footer a:hover {
 .budget-dl .percentage:after {
   content: "";
   display: block;
-  width: 2px;
+  width: 1px;
   margin-bottom: 10px;
   height: 90%;
   position: relative;
@@ -1185,6 +1239,12 @@ footer a:hover {
   width: 150%;
 }
 
+.budget-dl .view-table-button {
+  background-color: #1263ba;
+  display: block;
+  margin: 3vh auto 1vh auto;
+}
+
 .collection {
   margin-top: 10vh;
   -webkit-box-shadow: 2px 2px 4px #c4c5c4;
@@ -1221,12 +1281,6 @@ footer a:hover {
   font-size: 1rem;
   color: #393a3d;
   color: #2d3543;
-}
-
-@media only screen and (min-width: 800px) {
-  .collection a {
-    font-size: 1rem;
-  }
 }
 
 .collection a:hover {
@@ -1268,12 +1322,6 @@ footer a:hover {
   font-size: 1rem;
   color: #393a3d;
   color: #2d3543;
-}
-
-@media only screen and (min-width: 800px) {
-  .about-budget-plan-section .collection-item {
-    font-size: 1rem;
-  }
 }
 
 html {
