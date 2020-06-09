@@ -1,34 +1,3 @@
-<div class="row">
-  <table class="col s12 highlight centered">
-    <thead>
-      <tr>
-        <th>Budget Category</th>
-        <th>Total Estimated</th>
-        <th>Current Actual Total</th>
-      </tr>
-    <tbody>
-      <tr>
-        <td><a href="/budgetdetails/income">Income</a></td>
-        <td>$<%=expectedIncome%></td>
-        <td>$<%= totalIncome %></td>
-      </tr>
-      <tr>
-        <td><a href="/budgetdetails/firm-expense">Firm Expense</a></td>
-        <td>$<%=expectedFirmExpenses%></td>
-        <td class="<%=actualFirmExpenseColorClass%>">
-          $<%=firmExpenseTotal%>
-        </td>
-      </tr>
-      <tr>
-        <td><a href="/budgetdetails/flex-expense">Flex Expense</a></td>
-        <td>$<%=expectedFlexExpenses%></td>
-        <td class="<%=actualFlexExpenseColorClass%>">
-          $<%=flexExpenseTotal%>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 <% 
 // functions
 const calculateTotal = (Itemcategory) => {
@@ -59,23 +28,35 @@ const expectedIncome = budgetplan[0].expectedincome;
 const expectedFirmExpenses = budgetplan[0].expectedfirmexpenses;
 const expectedFlexExpenses = budgetplan[0].expectedflexexpenses;
 const totalExpectedExpense = parseInt(expectedFirmExpenses) + parseInt(expectedFlexExpenses);
-const incomepercentage = 100 / (expectedIncome / totalIncome)
-const firmpercentage = 100 / (expectedFirmExpenses / firmExpenseTotal)
-const flexpercentage = 100 / (expectedFlexExpenses / flexExpenseTotal)
+const incomepercentage = Math.round(100 / (expectedIncome / totalIncome));
+const firmpercentage = Math.round(100 / (expectedFirmExpenses / firmExpenseTotal));
+const flexpercentage = Math.round(100 / (expectedFlexExpenses / flexExpenseTotal));
 %>
 
 
-<dl>
-  <dt>Check How Your Budget's Doing: </dt>
-  <dd class="percentage percentage-100"><span class="text">Expected Income: $<%= expectedIncome %></span></dd>
-  <dd class="percentage percentage-<%=incomepercentage%>"><span class="text">Current Income Earned:
+<dl class='budget-dl'>
+  <dt>Check This Month's Progress</dt>
+  <dd class="percentage percentage-100 expected-color"><span class="text">Expected Income: $<%= expectedIncome %></span>
+  </dd>
+  <dd class="percentage percentage-<%=incomepercentage%> actual-color"><span class="text">Current Income:
       $<%=totalIncome %></span></dd>
-  <dd class="percentage percentage-100"><span class="text">Expected Firm Expenses: $<%=expectedFirmExpenses%></span>
+  <dd class="percentage percentage-100 expected-color"><span class="text">Expected Firm Expenses:
+      $<%=expectedFirmExpenses%></span>
   </dd>
-  <dd class="percentage percentage-<%=firmpercentage%>"><span class="text">Current Firm Expenses:
+  <dd class="percentage percentage-<%=firmpercentage%> actual-color"><span class="text">Current Firm Expenses:
       $<%=firmExpenseTotal%></span></dd>
-  <dd class="percentage percentage-100"><span class="text">Expected Flex Expenses: $<%=expectedFlexExpenses%></span>
+  <dd class="percentage percentage-100 expected-color"><span class="text">Expected Flex Expenses:
+      $<%=expectedFlexExpenses%></span>
   </dd>
-  <dd class="percentage percentage-<%=flexpercentage%>"><span class="text">Current Flex Expenses:
+  <dd class="percentage percentage-<%=flexpercentage%> actual-color"><span class="text">Current Flex Expenses:
       $<%=flexExpenseTotal%></span></dd>
 </dl>
+
+<ul class="collection with-header">
+  <li class="collection-header">
+    <h4>View Your Expenses / Income In Detail: </h4>
+  </li>
+  <li class="collection-item"><a href="/budgetdetails/income">Income</a></li>
+  <li class="collection-item"><a href="/budgetdetails/firm-expense">Firm Expense</a></li>
+  <li class="collection-item"><a href="/budgetdetails/flex-expense">Flex Expense</a></li>
+</ul>

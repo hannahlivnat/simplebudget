@@ -13,6 +13,7 @@
   }
 }
 
+//card section containing overview
 .card-container {
   margin: -5vh auto 10vh auto;
   border-radius: $form-border-radius;
@@ -24,5 +25,112 @@
   h4 {
     @include secondary-header-font;
     color: $bright-dark-blue;
+  }
+}
+
+//chart - Budget Check In
+// https://css-tricks.com/making-charts-with-css/
+
+.budget-dl {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1500px;
+  box-shadow: $box-shadow;
+  position: relative;
+  padding: 40px 20px;
+  box-sizing: border-box;
+
+
+  dt {
+    align-self: flex-start;
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+    @include secondary-header-font;
+    color: $bright-dark-blue;
+    text-align: left;
+  }
+
+  .text,
+  a {
+    @include paragraph-font;
+    color: $chalkboard-black;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 40px;
+    width: 130px;
+    position: absolute;
+    left: 20px;
+  }
+
+  .percentage {
+    font-size: .8em;
+    line-height: 1;
+    text-transform: uppercase;
+    width: 70%;
+    height: 40px;
+    margin-left: 150px;
+    // background: repeating-linear-gradient(to right, $grey, $grey 1px, $whitesmoke 1px, $whitesmoke 1px);
+
+    &:after {
+      content: "";
+      display: block;
+      width: 2px;
+      margin-bottom: 10px;
+      height: 90%;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: background-color .3s ease;
+      background-color: $darker-blue;
+
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:focus {
+      &:after {
+        background-color: #aaa;
+      }
+    }
+  }
+
+
+  //generate a bunch of percentage classes: 
+  @for $i from 1 through 150 {
+
+    //i = our current spending or income is i% of our budget
+    .percentage-#{$i} {
+      &:after {
+        $value: ($i * 1%);
+        //if our value is 20, our width with be 20%...
+        width: $value;
+      }
+
+    }
+  }
+}
+
+//collection list with links to show pages
+.collection {
+  margin-top: 10vh;
+  box-shadow: $box-shadow;
+
+  h4 {
+    @include secondary-header-font;
+    color: $bright-dark-blue;
+  }
+
+  a {
+    @include paragraph-font;
+    color: $chalkboard-black;
+
+    &:hover {
+      color: $darker-blue;
+    }
   }
 }

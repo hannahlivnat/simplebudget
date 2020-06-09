@@ -1,26 +1,20 @@
-<!-- dropdown structure -->
-<ul id="dropdown1" class="dropdown-content">
-  <li>
-    <a href="/budgetdetails/new">New Expense/Income</a>
-  </li>
-  <% if(budgetplan.length > 0) {%>
-  <li><a href="/budgetplans/<%= budgetplan[0]._id %>/edit">Edit Budget Plan</a></li>
-  <% } else { %>
-  <li><a href="/budgetplans/new">Create Budget Plan</a></li>
-  <% } %>
-</ul>
 <nav>
   <div class="nav-wrapper">
     <h4 class="brand-logo">SimplyBudget</h4>
     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <!-- large screen nav links -->
     <ul class="right hide-on-med-and-down desktop-nav-ul">
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Control Your Budget <i
-            class="material-icons right">arrow_drop_down</i></a>
+      <li>
+        <a href="/budgetdetails/new">New Expense/Income</a>
       </li>
+      <% if(budgetplan.length > 0) {%>
+      <li><a href="/budgetplans/<%= budgetplan[0]._id %>/edit">Edit Budget Plan</a></li>
+      <% } else { %>
+      <li><a href="/budgetplans/new">Create Budget Plan</a></li>
+      <% } %>
       <li>
         <form action="/sessions?_method=DELETE" method="POST">
-          <input class="btn" type="submit" value="Log Out">
+          <input class="btn delete-session-button" type="submit" value="Log Out">
         </form>
       </li>
     </ul>

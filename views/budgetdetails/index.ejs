@@ -44,9 +44,6 @@
     return monthString;
   };
   %>
-
-
-
   <%
   <!-- Variables Used In Page  -->
   const totalIncome = calculateTotal('income');
@@ -94,35 +91,8 @@
         </div>
       </div>
       <div class="row">
-        <table class="col s12 highlight centered">
-          <thead>
-            <tr>
-              <th>Budget Category</th>
-              <th>Total Estimated</th>
-              <th>Current Actual Total</th>
-            </tr>
-          <tbody>
-            <tr>
-              <td><a href="/budgetdetails/income">Income</a></td>
-              <td>$<%=expectedIncome%></td>
-              <td>$<%= totalIncome %></td>
-            </tr>
-            <tr>
-              <td><a href="/budgetdetails/firm-expense">Firm Expense</a></td>
-              <td>$<%=expectedFirmExpenses%></td>
-              <td class="<%=actualFirmExpenseColorClass%>">
-                $<%=firmExpenseTotal%>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="/budgetdetails/flex-expense">Flex Expense</a></td>
-              <td>$<%=expectedFlexExpenses%></td>
-              <td class="<%=actualFlexExpenseColorClass%>">
-                $<%=flexExpenseTotal%>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <%- include('../partials/budgettable.ejs')%>
+
       </div>
 
     </div>

@@ -140,8 +140,8 @@ router.get('/income', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
 });
 
 //FIRM EXPENSE SHOW ROUTE
-router.get('/firmexpense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
-  res.render('budgetdetails/firm-expense.ejs', {
+router.get('/firm-expense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
+  res.render('budgetdetails/firmexpense.ejs', {
     pageName: 'Firm Expenses Page',
     budgetdetails: req.session.user.budgetdetails,
     currentUser: req.session.user,
@@ -152,8 +152,8 @@ router.get('/firmexpense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) =
 });
 
 //FLEX EXPENSE SHOW ROUTE
-router.get('/flexexpense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
-  res.render('budgetdetails/flex-expense.ejs', {
+router.get('/flex-expense', isAuthenticated, doesUserHaveBudgetPlan, (req, res) => {
+  res.render('budgetdetails/flexexpense.ejs', {
     pageName: 'Flex Expense Page',
     budgetdetails: req.session.user.budgetdetails,
     currentUser: req.session.user,

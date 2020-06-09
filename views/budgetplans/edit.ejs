@@ -9,12 +9,16 @@
 <body>
   <div class="content">
     <%- include('../partials/nav.ejs')%>
-
+    <header class="index-header">
+      <h2 class="center">Let's Edit Your Budget!
+      </h2>
+    </header>
     <div class="container">
-      <h1>Create a Budget Plan</h1>
+
       <div class="row">
-        <form class="col s12" action="/budgetplans/<%=budgetPlan.id%>?_method=PUT" method="POST">
+        <form class="box-form" class="col s12" action="/budgetplans/<%=budgetPlan.id%>?_method=PUT" method="POST">
           <div class="row">
+            <h4>Your Budget for the Month: </h4>
             <div class="input-field col s12">
               <input type="number" name="expectedincome" id="expectedincome" value="<%=budgetPlan.expectedincome%>"
                 required />
@@ -36,39 +40,39 @@
             </div>
           </div>
           <div class="row">
-            <input class="btn col s4" type="submit" value="Create Your Budget Plan">
+            <input class="btn-small" type="submit" value="Create Your Budget Plan">
           </div>
         </form>
       </div>
-      <hr>
-      <h2>About Your Budget Plan</h2>
-
-      <p>This budget plan is designed for simplicity, so there are only three categories that you need to plan: Income,
-        Flex Expenses, and Firm Expenses!</p>
-      <ul>
-        <li><span class="material-icons">
+      <ul class="collection-with-header about-budget-plan-section">
+        <li class="collection-header">
+          <h4>About Your Budget Plan</h4>
+        </li>
+        <li class="collection-item flow-text">
+          This budget plan is designed for simplicity, so there are only three
+          categories that you need to plan: Income, Flex Expenses, and Firm Expenses!</li>
+        <li class="collection-item flow-text"><span class="material-icons">
             monetization_on
-          </span> Income - Any source of money the you gain falls into this category, whether it be your paycheck or a
-          gift</li>
-        <li><span class="material-icons">
+          </span> Income - <br />
+          Any source of money the you gain falls into this category, whether it be your paycheck or a
+          passive income</li>
+        <li class="collection-item flow-text"><span class="material-icons">
             add_shopping_cart
-          </span>Flex Expenses - These are any expenses which you change from month to month. This category includes
-          grocery
-          shopping, restaurants, clothing,
+          </span>Flex Expenses - <br />
+          These are any expenses which you change from month to month. This category
+          includes grocery shopping, restaurants, clothing,
           movies, travel, gas, and anything else that you spend a varying amount of money on. We place this all in one
           category to give you a greater understanding
-          of how much your actually spending and to provide greater flexibility for everything life throws your way.
-          This
-          is the expense category that you'll want to keep
+          of how much you're actually spending and to provide greater flexibility for everything life throws your way.
+          Thisis the expense category that you'll want to keep
           a closer eye on during the month!
         </li>
-        <li><span class="material-icons">
+        <li class="collection-item flow-text"><span class="material-icons">
             house
-          </span>Firm Expenses - These are any expenses that remain the same from month to month. This category includes
-          your
-          rent or mortgage, health insurance, car payments,
-          a monthly cleaning service with set fees, your phone bill, internet, electricity. There's not much that will
-          change these bills on a month to month basis, so we throw
+          </span>Firm Expenses - <br />
+          These are any expenses that remain the same from month to month. This category
+          includes your rent / mortgage, health insurance, car payments, or your interner bill.
+          There's not much that will change these bills on a month to month basis, so we throw
           them into your firm expenses.
         </li>
       </ul>

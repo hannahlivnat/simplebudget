@@ -9,11 +9,14 @@
 <body>
   <div class="content">
     <%- include('../partials/nav.ejs')%>
-
+    <header class="index-header">
+      <h2 class="center new-detail-header">Add to Your Income and Expenses for the Month
+      </h2>
+    </header>
     <div class="container">
-      <h1>Add to Your Income / Expenses</h1>
       <div class="row">
-        <form class="col s12" action="/budgetdetails" method="post">
+        <form class="box-form col s12" action="/budgetdetails" method="post">
+          <h4>Add Income / Expenses</h4>
           <div class="row">
             <div class="input-field col s6">
               <input type="text" name="date" class="datepicker" required />
@@ -44,7 +47,7 @@
             </div>
           </div>
           <div class="row">
-            <input class="btn col s4" type="submit" value="Add New Income/Expense">
+            <input class="btn-small" type="submit" value="Add New Income/Expense">
           </div>
         </form>
       </div>

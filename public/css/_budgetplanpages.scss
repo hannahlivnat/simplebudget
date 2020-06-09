@@ -1,0 +1,17 @@
+//about your budget plan section
+
+.about-budget-plan-section {
+  margin-top: 5vh;
+
+  h4 {
+    @include secondary-header-font;
+    color: $bright-dark-blue;
+  }
+
+  .collection-item {
+    margin-top: 2vh;
+
+    @include paragraph-font;
+    color: $chalkboard-black;
+  }
+}
