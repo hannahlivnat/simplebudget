@@ -118,7 +118,7 @@ router.put('/:id', (req, res) => {
         //changed this
         budgetArray[updateThisOne] = updatedItem;
         budgetArray.splice(updateThisOne, 1, updatedItem);
-        res.redirect(`/budgetdetails/${updatedItem._id}`);
+        res.redirect(`/budgetdetails/${updatedItem.category}`);
       })
     }
   });
