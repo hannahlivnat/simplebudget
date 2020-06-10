@@ -298,6 +298,7 @@ nav {
 
 .about-section .card-container .card {
   width: 100%;
+  padding-bottom: 3rem;
   border-radius: 10px;
   border-top: 4px solid #BA6912;
   color: #2d3543;
@@ -307,6 +308,10 @@ nav {
   .about-section .card-container .card {
     width: 30%;
   }
+}
+
+.about-section .card-container .card p {
+  padding: .3rem .1rem;
 }
 
 .about-section .card-container .card .card-title {
@@ -680,7 +685,9 @@ footer a:hover {
   font-family: "PT Serif", serif;
   font-size: 1rem;
   color: #393a3d;
-  font-size: 0.7rem;
+  font-family: "PT Sans", sans-serif;
+  font-size: 1rem;
+  color: #265d7e;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -691,6 +698,7 @@ footer a:hover {
   width: 130px;
   position: absolute;
   left: 20px;
+  line-height: 1.2rem;
 }
 
 @media only screen and (max-width: 350px) {
@@ -703,10 +711,10 @@ footer a:hover {
 .budget-dl .percentage {
   font-size: .8em;
   line-height: 1;
-  text-transform: uppercase;
   width: 70%;
-  height: 40px;
+  height: 50px;
   margin-left: 150px;
+  margin-bottom: 2px;
 }
 
 .budget-dl .percentage:after {

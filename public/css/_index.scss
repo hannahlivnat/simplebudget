@@ -130,22 +130,26 @@
     }
 
     @include paragraph-font;
-    font-size: $xs-size;
+    font-family: $PT-Sans;
+    font-size: $sm-size;
+    color: $darker-blue;
     display: flex;
     align-items: center;
     height: 40px;
     width: 130px;
     position: absolute;
     left: 20px;
+    line-height: 1.2rem;
+    ;
   }
 
   .percentage {
     font-size: .8em;
     line-height: 1;
-    text-transform: uppercase;
     width: 70%;
-    height: 40px;
+    height: 50px;
     margin-left: 150px;
+    margin-bottom: 2px;
     // background: repeating-linear-gradient(to right, $grey, $grey 1px, $whitesmoke 1px, $whitesmoke 1px);
 
     &:after {

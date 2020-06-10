@@ -58,9 +58,14 @@
       }
 
       width: 100%;
+      padding-bottom: 3rem;
       border-radius: $form-border-radius;
       border-top: 4px solid $peru-orange;
       color: $chalkboard-black;
+
+      p {
+        padding: .3rem .1rem;
+      }
 
       .card-title {
         @include secondary-header-font;
